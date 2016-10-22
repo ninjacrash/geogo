@@ -37,6 +37,7 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     err := decoder.Decode(&ur)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
     }
     defer req.Body.Close()
     log.Println(ur)
