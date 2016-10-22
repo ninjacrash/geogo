@@ -1,0 +1,9 @@
+<div id="shelters">
+
+	<div id="shelterList">
+		<div class="shelterListLabel">Shelters</div>
+		<div id="shelterListInner"></div>
+	</div>
+
+
+</div>

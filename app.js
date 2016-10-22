@@ -1,3 +1,4 @@
+var BASE_URL = "http://pg.globalhack.ninja";
 
 (function($) {
 
@@ -199,6 +200,34 @@
         context.app.swap('');
         context.render('templates/help2.template', {}).appendTo(context.$element()).then(function(){
 			alert("asdf");
+		});
+	});
+	
+	
+    this.get('#/shelters/', function(context) {
+        var str=location.href.toLowerCase();
+        context.app.swap('');
+        context.render('templates/shelters.template', {}).appendTo(context.$element()).then(function(){
+			
+			$.get(BASE_URL + "/shelter", function(data){
+				console.log("Done");
+				console.log(data);
+				
+				for(var i = 0; i < data.length; i++)
+				{
+					console.log(data[i]);
+					
+					var div = "<div class='shelterItem'>"
+					div += "	<div class='shelterItemTitle'>" + data[i].shelter_name + "</div>"
+					div += "	<div class='shelterItemAddress'>" + data[i].street_address + ", " + data[i].city + ", " + data[i].state + " " + data[i].zip_code + "</div>";
+					div += "	<div class='shelterItemPhone'>" + data[i].phone + "</div>";
+					div += "</div><br>";
+					
+					$("#shelterListInner").append(div);
+				}
+				
+			});
+			
 		});
 	});
 
