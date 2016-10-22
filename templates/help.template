@@ -35,7 +35,7 @@
 		<label class="helpInputLabel" for="username">Enter a desired user name, leave blank for anonymous, we will generate a user id for you</label><br/>
 		<input name="username" class="helpUserNameInput helpUsername" placeholder="username"/><br/>
 		<input name="email" class="helpUserNameInput helpEmail" placeholder="Email"/><br/>
-		<input name="phone" class="helpUserNameInput helpPhone" placeholder="phone"/><br/>
+		<input name="phone" class="helpUserNameInput helpPhone" placeholder="phone (xxx-xxx-xxxx)"/><br/>
 		<textarea name="reason" class="helpUserNameInput helpTextarea helpReason" placeholder="reason for seeking help"/><br/>
 		<select name="gender" class="helpDropDown helpGender">
 			<option value="Female">Female</option>
@@ -58,13 +58,14 @@
 		
 		
 		
-		
-		
-		
-		
 		<div class="helpSendButton">Send</div>
 		
 	</div>
 	
+	
+	
+	<div class="stateContainer" id="step4" style="display:none;">
+		You have been registered thank you!
+	</div>
 </div>
 

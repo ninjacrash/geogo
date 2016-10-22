@@ -168,17 +168,19 @@
     			postData.Homeless = model.homesless;
     			postData.Employed = model.employed;
     			postData.Date_Of_Birth = model.dobMonth + "-" + model.dobDay + "-" + model.dobYear;
-							
+					
+					/*		
  			   $.post("mail.php", this.params,
-                	function(data) {
-                   	 	console("Data Loaded: " + data);
-            		});
-				});
+                function(data) {
+                    alert("Data Loaded: " + data);
+            	});
+			*/
 			
 			
         });
     });
-    
+});
+	
 	
     this.get('#/about/', function(context) {
 		console.log("ets");
