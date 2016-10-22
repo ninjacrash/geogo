@@ -326,3 +326,90 @@ nav a:hover {
 	margin-top: 20px;
 	
 }
+
+
+
+.helpEnterInfoLabel {
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	
+	
+}
+
+.helpUserNameInput {
+	border: 2px solid #366A7F;
+	width: 200px;
+	height: 30px;
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.helpUserNameInput2 {
+	border: 2px solid #366A7F;
+	width: 100px;
+	height: 30px;
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+
+.helpSendButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.helpInputLabel {
+	font-family: Montserrat;
+	font-size: 14px;
+	cursor: pointer;
+	color: #366A7F;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+
+.helpTextarea {
+	width: 300px;
+	height: 100px;
+}
+
+
+.helpDropDown option{
+	width: 200px;
+	height: 50px;
+	
+	font-family: Montserrat;
+	font-size: 14px;
+	cursor: pointer;
+	color: #366A7F;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}

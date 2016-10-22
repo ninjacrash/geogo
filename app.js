@@ -39,15 +39,19 @@
 		$(".step2Button").each(function(index){
 			if($(this).data("selected") == true)
 			{
-				console.log($(this).attr("value"));
+				//console.log($(this).attr("value"));
+				helpItems[helpItems.length] = $(this).attr("value");
 			}
 			
 		});
+		return helpItems;
 	}
 	
 	
     this.get('#/', function(context) {
 		$("#step2").hide();
+		$("#step3").hide();
+		
         var str=location.href.toLowerCase();
         context.app.swap('');
 		
@@ -72,7 +76,6 @@
 				var del1 = HelpDelegate.getInstance();
 				del1.handleStep1Click(AppModel.ANONYMOUS);
 			});
-			
 			
 			
 			//STEP 2
@@ -120,7 +123,13 @@
 			
 			
 			$(".nextButton").click(function(){
-				console.log(root.getHelpNeeded());
+				var model = AppModel.getInstance();
+				model.servicesNeeded = root.getHelpNeeded();
+				$("#step2").hide();
+				$("#step3").show();
+				
+				console.log(model.servicesNeeded);
+				console.log(model.userType);
 			});
 			
 			
