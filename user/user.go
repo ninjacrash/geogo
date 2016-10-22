@@ -76,7 +76,7 @@ func handleSql(ur UserRequest) (string, error) {
     "homeless,employed) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)")
   if err != nil {
     fmt.Printf("\n\n%s\n\n", stmt)
-    log.Fatal(err)
+    return "", err
   }
   //fmt.Printf("%s",stmt)
   res, err := stmt.Exec(ur.User_Id,ur.Id_Type,ur.Email,ur.Phone,ur.Reason,
