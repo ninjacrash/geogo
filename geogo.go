@@ -8,6 +8,7 @@ import (
 	"os"
 	"github.com/ninjacrash/geogo/gohttp"
 	"github.com/ninjacrash/geogo/user"
+	"github.com/ninjacrash/geogo/shelter"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 
 	r.HandleFunc("/geo", gohttp.Geolocate)
 	r.HandleFunc("/user", user.CreateUser)
+	r.HandleFunc("/shelters", shelter.GetShelter)
 
 	http.Handle("/", r)
 	fmt.Printf("server started on port %s\n", port)
