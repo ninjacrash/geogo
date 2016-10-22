@@ -57,7 +57,6 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     uuid_b := []byte(uuid)
     var phone_regex = regexp.MustCompile(`^(\d{3,4}.{0,1}){3}$`)
     var email_regex = regexp.MustCompile(`^.*@.*.*$`)
-    ur.Dependents = int(ur.Dependents)
     if phone_regex.Match(uuid_b){
       ur.Id_Type = "phone"
     } else if email_regex.Match(uuid_b) {
