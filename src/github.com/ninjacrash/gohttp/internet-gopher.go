@@ -4,24 +4,30 @@ import (
     "fmt"
     "log"
     "net/http"
+    "net/url"
     "encoding/json"
     "io/ioutil"
+    "os"
 )
 
 
-type results struct {
-    geometry struct {
-        location struct {
-          lat float32
-          lng float32
-        }
+type GeoResults struct {
+  Results []Results
+}
+
+type Results struct {
+  Geometry struct {
+    Location struct {
+      Lat float32
+      Lng float32
     }
+  }
 }
 
 
-type final_response struct{
-  lat float32
-  long float32
+type Final_Response struct{
+  Lat float32
+  Long float32
 }
 
 
@@ -29,52 +35,43 @@ func main() {
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         fmt.Println("GET params were:", r.URL.Query());
 
-        var zip string
-        //var address string
+        var addr string
 
         for key, value := range r.URL.Query() {
-          if key == "zip_code" {
-            zip = value[0]
+          if key == "zip_code" || key == "address" {
+            addr = url.QueryEscape(value[0])
           }
           //fmt.Println("Key:", key, "Value:", value[0])
         }
-        fmt.Println(zip)
-        if zip != "" {
+        fmt.Println(addr)
+        if addr != "" {
           var base_url string = "https://maps.googleapis.com/maps/api/geocode/json?address="
-          var url string = base_url + zip
+          var url string = base_url + addr
           response, err := http.Get(url)
           if err != nil{
             fmt.Println("error")
           }
-          fmt.Println(url)
-          //json.NewDecoder(response.Body).Decode(&body)
-          var body_string string
+          //fmt.Println(url)
           defer response.Body.Close()
             if response.StatusCode == 200 { // OK
-              res := &results{}
               raw_json, err := ioutil.ReadAll(response.Body)
               if err != nil {
                 http.Error(w, err.Error(), http.StatusInternalServerError)
               }
-              var json_data results
-              err = json.Unmarshal([]byte(raw_json), &json_data)
-              final := &final_response{lat: json_data.geometry.location.lat, long: json_data.geometry.location.lng}
-              b, err := json.Marshall(final)
+              //fmt.Println(os.Stdout, string(raw_json))
+              var jr GeoResults
+              err = json.Unmarshal([]byte(raw_json), &jr)
+              //fmt.Println(jr)
+              final_json := &Final_Response{Lat: jr.Results[0].Geometry.Location.Lat,
+                                            Long: jr.Results[0].Geometry.Location.Lng}
+              b, err := json.Marshal(final_json)
               if err != nil {
                 fmt.Println("err")
               }
-              //bodyBytes, err := ioutil.ReadAll(response.Body)
-              //if err != nil{
-                //fmt.Println("wut")
-              //}
-              //body_string = string(bodyBytes)
-              //fmt.Println(body_string)
               w.Header().Set("Content-Type", "application/json")
               //fmt.Println()
               w.Write(b)
             }
-        } else {
-          fmt.Printf("fail")
         }
     })
 
