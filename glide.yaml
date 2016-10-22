@@ -1,3 +1,4 @@
 package: github.com/ninjacrash/geogo
 import:
 - package: github.com/gorilla/mux
+- package: github.com/lib/pq
