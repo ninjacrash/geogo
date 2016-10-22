@@ -36,6 +36,8 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
       return
     }*/
     w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-type")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
     // Stop here if its Preflighted OPTIONS request
     if req.Method == "OPTIONS" {
         return
