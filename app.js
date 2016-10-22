@@ -134,9 +134,7 @@
 			
 			$(".helpSendButton").click(function(){
 				
-				
-				
-    
+    			
 				var model = AppModel.getInstance();
 				var postData = {};
 				postData.Id_Type = model.userType;
@@ -171,10 +169,11 @@
     			postData.Employed = model.employed;
     			postData.Date_Of_Birth = model.dobMonth + "-" + model.dobDay + "-" + model.dobYear;
 							
-						
-				
-				
-			});
+ 			   $.post("mail.php", this.params,
+                	function(data) {
+                   	 	console("Data Loaded: " + data);
+            		});
+				});
 			
 			
         });
