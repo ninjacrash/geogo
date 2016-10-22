@@ -7,6 +7,7 @@ import (
     "encoding/json"
     //"github.com/gorilla/mux"
     //"io/ioutil"
+    "regexp"
     "os"
     "database/sql"
     _ "github.com/lib/pq"
@@ -39,7 +40,18 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     }
     defer req.Body.Close()
     log.Println(ur)
+    uuid := ur.User_Id
+    uuid_b := []byte(uuid)
+    var phone_regex = regexp.MustCompile(`^(\d{3,4}.{0,1}){3}$`)
+    var email_regex = regexp.MustCompile(`^.*@.*.*$`)
 
+    if phone_regex.Match(uuid_b){
+      ur.Id_Type = "phone"
+    } else if email_regex.Match(uuid_b) {
+      ur.Id_Type = "email"
+    } else {
+      ur.Id_Type = "anonymous"
+    }
     fmt.Println("GET params were:", req.URL.Query());
     res, err := handleSql(ur)
     if err != nil {
