@@ -7,12 +7,13 @@ import (
     "net/url"
     "encoding/json"
     "io/ioutil"
-    "os"
+    //"os"
 )
 
 
 type GeoResults struct {
   Results []Results
+  Status string
 }
 
 type Results struct {
@@ -61,16 +62,22 @@ func main() {
               //fmt.Println(os.Stdout, string(raw_json))
               var jr GeoResults
               err = json.Unmarshal([]byte(raw_json), &jr)
-              //fmt.Println(jr)
-              final_json := &Final_Response{Lat: jr.Results[0].Geometry.Location.Lat,
-                                            Long: jr.Results[0].Geometry.Location.Lng}
-              b, err := json.Marshal(final_json)
-              if err != nil {
-                fmt.Println("err")
+              if jr.Status != "OK"{
+                http.Error(w, `[{}]`, http.StatusNotFound)
+              } else {
+                //fmt.Println(jr)
+                final_json := &Final_Response{Lat: jr.Results[0].Geometry.Location.Lat,
+                                              Long: jr.Results[0].Geometry.Location.Lng}
+                b, err := json.Marshal(final_json)
+                if err != nil {
+                  fmt.Println("err")
+                  http.Error(w, err.Error(), http.StatusInternalServerError)
+                }
+                w.Header().Set("Content-Type", "application/json")
+                //fmt.Println()
+                w.Write(b)
               }
-              w.Header().Set("Content-Type", "application/json")
-              //fmt.Println()
-              w.Write(b)
+
             }
         }
     })
