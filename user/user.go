@@ -36,15 +36,6 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     /*(if req.Method != "POST"{
       return
     }*/
-    for i, ch := range req.Body {
-      switch {
-      case ch > '~':   req.Body[i] = ' '
-      case ch == '\r':
-      case ch == '\n':
-      case ch == '\t':
-      case ch < ' ':   req.Body[i] = ' '
-      }
-    }
     decoder := json.NewDecoder(req.Body)
     var ur UserRequest
     err := decoder.Decode(&ur)
