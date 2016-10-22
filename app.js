@@ -128,8 +128,52 @@
 				$("#step2").hide();
 				$("#step3").show();
 				
-				console.log(model.servicesNeeded);
-				console.log(model.userType);
+				//console.log(model.servicesNeeded);
+				//console.log(model.userType);
+			});
+			
+			$(".helpSendButton").click(function(){
+				
+				
+				
+    
+				var model = AppModel.getInstance();
+				var postData = {};
+				postData.Id_Type = model.userType;
+				postData.Needs = model.servicesNeeded;
+				
+				
+				model.username 	= $(".helpUsername").val();
+				model.email 		= $(".helpEmail").val();
+				model.phone 		= $(".helpPhone").val();
+				model.reason 		= $(".helpReason").val();
+				model.gender 		= $(".helpGender").val();
+				model.veteran		= $(".helpVeteran").val() == "on" ? true : false;
+				model.education 	= $(".helpEducation").val();
+				model.dependents 	= $(".helpDependents").val();
+				model.enthnicity	= $(".helpEthnicity").val();
+				model.homesless 	= $(".helpHomeless").val() == "on" ? true : false;
+				model.employed 		= $(".helpEmployed").val() == "on" ? true : false;
+				model.dobMonth 		= $(".helpDobMonth").val();
+				model.dobDay	 	= $(".helpDobDay").val();
+				model.dobYear 		= $(".helpDobYear").val();
+				
+				
+    			postData.Email 	= model.email;
+    			postData.Phone  = model.phone;
+    			postData.Reason = model.reason;
+    			postData.Gender = model.gender;
+    			postData.Veteran = model.veteran;
+    			postData.Education = model.education;
+    			postData.Dependents = model.dependents;
+    			postData.Ethnicity = model.enthnicity;
+    			postData.Homeless = model.homesless;
+    			postData.Employed = model.employed;
+    			postData.Date_Of_Birth = model.dobMonth + "-" + model.dobDay + "-" + model.dobYear;
+							
+						
+				
+				
 			});
 			
 			
