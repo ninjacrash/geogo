@@ -7,6 +7,7 @@ import (
     "encoding/json"
     //"github.com/gorilla/mux"
     //"io/ioutil"
+    "regexp"
     "os"
     "database/sql"
     _ "github.com/lib/pq"
@@ -36,10 +37,22 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     err := decoder.Decode(&ur)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
     }
     defer req.Body.Close()
     log.Println(ur)
+    uuid := ur.User_Id
+    uuid_b := []byte(uuid)
+    var phone_regex = regexp.MustCompile(`^(\d{3,4}.{0,1}){3}$`)
+    var email_regex = regexp.MustCompile(`^.*@.*.*$`)
 
+    if phone_regex.Match(uuid_b){
+      ur.Id_Type = "phone"
+    } else if email_regex.Match(uuid_b) {
+      ur.Id_Type = "email"
+    } else {
+      ur.Id_Type = "anonymous"
+    }
     fmt.Println("GET params were:", req.URL.Query());
     res, err := handleSql(ur)
     if err != nil {
@@ -64,7 +77,7 @@ func handleSql(ur UserRequest) (string, error) {
     "homeless,employed) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)")
   if err != nil {
     fmt.Printf("\n\n%s\n\n", stmt)
-    log.Fatal(err)
+    return "", err
   }
   //fmt.Printf("%s",stmt)
   res, err := stmt.Exec(ur.User_Id,ur.Id_Type,ur.Email,ur.Phone,ur.Reason,
