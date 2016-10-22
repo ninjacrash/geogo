@@ -1,0 +1,10 @@
+<div id="help">
+	<div class="helpLabel">I am a...</div>
+	<div class="buttonContainer">
+		<div class="helpButton iman">Man</div>
+		<div class="helpButton iwoman">Woman</div>
+		<div class="helpButton ifamily">Family</div>
+		<div class="helpButton ianon">Anonymous</div>
+	</div>
+</div>
+
