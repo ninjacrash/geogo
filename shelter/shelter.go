@@ -9,7 +9,7 @@ import (
 func GetShelter(w http.ResponseWriter, r *http.Request) {
 	// TODO: this needs to accept parameters
 	// Users may not be eligible for shelters based on gender/sex/etc
-	api_url := "http://ec2-54-159-3-36.compute-1.amazonaws.com/shelter"
+	api_url := "http://pg.globalhack.ninja"
 	resp, err := http.Get(api_url)
 	if err != nil {
 		fmt.Println("Failed to query shelters API")
