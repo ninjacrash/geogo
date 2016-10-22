@@ -1,10 +1,32 @@
 <div id="help">
-	<div class="helpLabel">I am a...</div>
-	<div class="buttonContainer">
-		<div class="helpButton iman">Man</div>
-		<div class="helpButton iwoman">Woman</div>
-		<div class="helpButton ifamily">Family</div>
-		<div class="helpButton ianon">Anonymous</div>
+	
+	<div class="stateContainer" id="step1">
+		<div class="helpLabel">I am a...</div>
+		<div class="buttonContainer">
+			<div class="helpButton step1 iman" value="man">Man</div>
+			<div class="helpButton step1 iwoman" value="woman">Woman</div>
+			<div class="helpButton step1 ifamily" value="family">Family</div>
+			<div class="helpButton step1 ianon" value="anonymous">Anonymous</div>
+		</div>
 	</div>
+	
+	<div class="stateContainer" id="step2" style="display:none;">
+		<div class="helpLabel">I need help with...</div>
+		<div class="buttonContainer">
+			<div class="helpButton step2Button housing" 	value="housing"><div class="helpTextContainer">Housing</div></div>
+			<div class="helpButton step2Button food" 		value="food"><div class="helpTextContainer">Food</div></div>
+			<div class="helpButton step2Button hygine" 	value="hygine"><div class="helpTextContainer">Hygine</div></div>
+			<div class="helpButton step2Button casemgmt" 	value="casemanagement"><div class="helpTextContainer">Case Mgmt</div></div>
+			<div class="helpButton step2Button employment" value="employment"><div class="helpTextContainer">Employment</div></div>
+			<div class="helpButton step2Button money" 	value="money"><div class="helpTextContainer">Monetary Svc</div></div>
+			<div class="helpButton step2Button other" 	value="other"><div class="helpTextContainer">Other</div></div>
+		</div>
+		
+		<div class="nextButton">NEXT</div>
+	</div>
+	
+	
+	
+	
 </div>
 

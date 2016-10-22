@@ -298,8 +298,31 @@ nav a:hover {
 	color: #ffffff;
 	cursor: pointer;
 	font-family: Montserrat;
-	font-size: 24px;
+	font-size: 20px;
 	display: inline-block;
 }
 
+.selectedHelpButton {
+	background: url(../assets/img/buttonBGSelected.png);
+    background-size: 203px 216px;
+    background-repeat: no-repeat;
+}
 
+.helpTextContainer {
+	
+}
+
+.nextButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+	
+}

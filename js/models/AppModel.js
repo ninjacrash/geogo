@@ -1,11 +1,9 @@
 class AppModel {
 	
 	constructor(height, width) {
-	    this.user_type = "";
+	    this.userType = "";
+		this.servicesNeeded = [];
 	  }
-	  
-	 
-	
 }
 
 AppModel.getInstance = function()
