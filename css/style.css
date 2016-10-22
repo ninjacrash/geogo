@@ -433,3 +433,10 @@ nav a:hover {
 	color: #366A7F;
 	font-weight: bold;
 }
+
+
+#map {
+	width: auto;
+	height: 400px;
+	margin-bottom: 20px;
+}
