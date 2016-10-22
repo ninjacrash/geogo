@@ -1,0 +1,101 @@
+<div id="help">
+	
+	<div class="stateContainer" id="step1">
+		<div class="helpLabel">Login</div>
+		<input name="login" class="helpUserNameInput loginEmail" placeholder="Login email"/><br/>
+		<input type="password" name="password" class="helpUserNameInput loginPassword" placeholder="Password"/>
+		<div class="loginButton">Login</div>
+	</div>
+	
+	<div class="stateContainer" id="step2" style="display: none;">
+		
+		<div class="helpLabel">People</div>
+		
+		<div id="filterBox">
+			<label class='filterLabel'>Veteran status</label>
+			<select class="veteranSelect">
+				<option value="both">Both vets and nonvets</option>
+				<option value="veteran">Veteran</option>
+				<option value="nonveteran">Nonveteran</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Homeless status</label>
+			<select class="homelessSelect">
+				<option value="both">Both homeless and nonhomeless</option>
+				<option value="veteran">homeless</option>
+				<option value="nonveteran">Nonhomeless</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Employment status</label>
+			<select class="employedSelect">
+				<option value="both">Both employed and unemployed</option>
+				<option value="veteran">Employed</option>
+				<option value="nonveteran">Unemployed</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Organization</label>
+		</div>
+		
+		
+		<br/>
+		<div class="genButton sendPeople">Send</div>
+		
+		
+		<br/>
+		<br/>
+		
+		
+		
+		<div class="genButton tallButton allPeople">All people</div>
+		<div class="genButton tallButton shelterPeople">People associated with this shelter</div>
+		<div class="genButton tallButton otherPeople">People associated with another shelter</div>
+		<div class="genButton tallButton noAssocPeople">People not associate with any shelter</div>
+		<div class="genButton tallButton newPeople">New entries</div>
+		<div class="genButton tallButton riskPeople">People at risk</div>
+		<div class="genButton tallButton riskPeople">Homeless people</div>
+	</div>
+	
+	<div class="stateContainer" id="step3" style="display:none;">
+		
+		<div class="helpEnterInfoLabel">Please enter an email, phone number or user name you would like to use.  You will be able to reuse this to login in the future.  You can also choose to be anonymous in which case we will assign you a user ID you will be need to remember for future use.  <br/>
+		<span style="color: #cc0000">ALL INFO IS OPTIONAL, YOU DO NOT HAVE TO FILL OUT WHAT YOU DONT WANT TO</span>
+		</div>
+		
+		<br/>
+		<label class="helpInputLabel" for="username">Enter a desired user name, leave blank for anonymous, we will generate a user id for you</label><br/>
+		<input name="username" class="helpUserNameInput helpUsername" placeholder="username"/><br/>
+		<input name="email" class="helpUserNameInput helpEmail" placeholder="Email"/><br/>
+		<input name="phone" class="helpUserNameInput helpPhone" placeholder="phone (xxx-xxx-xxxx)"/><br/>
+		<textarea name="reason" class="helpUserNameInput helpTextarea helpReason" placeholder="reason for seeking help"/><br/>
+		<select name="gender" class="helpDropDown helpGender">
+			<option value="Female">Female</option>
+			<option value="Male">Male</option>
+		</select><br/>
+		
+		<input type="checkbox" name="veteran" class="helpVeteran">Veteran?</input><br/>
+		<textarea name="education" class="helpUserNameInput helpTextarea helpEducation" placeholder="Tell us about your education"/><br/>
+		<input name="dependents" class="helpUserNameInput helpDependents" placeholder="# of dependents"/><br/>
+		<input name="ethnicity" class="helpUserNameInput helpEthnicity" placeholder="Ethnicity"/><br/>
+		<input type="checkbox" name="homeless" class="helpHomeless">Homeless?</input><br/>
+		<input type="checkbox" name="employed" class="helpEmployed">Employed?</input><br/>
+		
+		<br/>
+		<label class="helpInputLabel" for="dobMonth">Date of birth</label><br/>
+		<input name="dobMonth" class="helpUserNameInput2 helpDobMonth" placeholder="DOB Month"/>
+		<input name="dobDay" class="helpUserNameInput2 helpDobDay" placeholder="DOB Day"/>
+		<input name="dobYear" class="helpUserNameInput2 helpDobYear" placeholder="DOB Year"/>
+		<br/>
+		
+		
+		
+		<div class="helpSendButton">Send</div>
+		
+	</div>
+	
+	
+	
+	<div class="stateContainer" id="step4" style="display:none;">
+		You have been registered thank you!
+	</div>
+</div>
+
