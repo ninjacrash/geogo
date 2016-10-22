@@ -32,6 +32,17 @@ type UserRequest struct {
 }
 
 func CreateUser(w http.ResponseWriter, req *http.Request) {
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    /*(if req.Method != "POST"{
+      return
+    }*/
+    w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers",
+            "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+    // Stop here if its Preflighted OPTIONS request
+    if req.Method == "OPTIONS" {
+        return
+    }
     decoder := json.NewDecoder(req.Body)
     var ur UserRequest
     err := decoder.Decode(&ur)
