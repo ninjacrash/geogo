@@ -32,6 +32,9 @@ type UserRequest struct {
 }
 
 func CreateUser(w http.ResponseWriter, req *http.Request) {
+    if req.Method != "POST"{
+      return
+    }
     decoder := json.NewDecoder(req.Body)
     var ur UserRequest
     err := decoder.Decode(&ur)
