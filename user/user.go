@@ -40,9 +40,11 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     if req.Method == "OPTIONS" {
         return
     }
+    fmt.Println(req.Body)
     decoder := json.NewDecoder(req.Body)
     var ur UserRequest
     err := decoder.Decode(&ur)
+    fmt.Println(ur)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
