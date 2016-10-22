@@ -15,7 +15,7 @@
 		<div class="buttonContainer">
 			<div class="helpButton step2Button housing" 	value="housing"><div class="helpTextContainer">Housing</div></div>
 			<div class="helpButton step2Button food" 		value="food"><div class="helpTextContainer">Food</div></div>
-			<div class="helpButton step2Button hygine" 	value="hygine"><div class="helpTextContainer">Hygine</div></div>
+			<div class="helpButton step2Button hygine" 	value="hygine"><div class="helpTextContainer">Hygiene</div></div>
 			<div class="helpButton step2Button casemgmt" 	value="casemanagement"><div class="helpTextContainer">Case Mgmt</div></div>
 			<div class="helpButton step2Button employment" value="employment"><div class="helpTextContainer">Employment</div></div>
 			<div class="helpButton step2Button money" 	value="money"><div class="helpTextContainer">Monetary Svc</div></div>
@@ -66,6 +66,7 @@
 	
 	<div class="stateContainer" id="step4" style="display:none;">
 		You have been registered thank you!
+		<div id="generatedUUID"></div>
 	</div>
 </div>
 

@@ -19,7 +19,7 @@ class AppModel {
 		this.dobDay = "";
 		this.dobYear = "";
 		
-		
+		this.uuide = "";
 		
 		
 		

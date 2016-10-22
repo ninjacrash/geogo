@@ -140,7 +140,7 @@ var API_BASE = "http://api.globalhack.ninja";
 				var model = AppModel.getInstance();
 				var postData = {};
 				//postData.id_type = model.userType;
-				postData.needs = model.servicesNeeded;
+				postData.needs = "{" + model.servicesNeeded.join(",") + "}";
 				
 				
 				model.username 	= $(".helpUsername").val();
@@ -159,11 +159,24 @@ var API_BASE = "http://api.globalhack.ninja";
 				model.dobYear 		= $(".helpDobYear").val();
 				
 				
+				
+				
 				postData.user_id = model.username;
+				if(postData.user_id == "")
+				{
+					var uuidNum = uuid.v1(); 
+					console.log("NUM");
+					console.log(uuidNum);
+					model.uuid = uuidNum;
+					postData.user_id = model.uuid;
+					
+					$("#generatedUUID").html(model.uuid);
+				}
+				
     			postData.email 	= model.email;
     			postData.phone  = model.phone;
     			postData.reason = model.reason;
-    			postData.gender = model.gender;
+    			postData.gender = model.gender == "Male" ? "m" : "f";
     			postData.veteran = model.veteran;
     			postData.education = model.education;
     			postData.dependents = model.dependents;
@@ -187,10 +200,24 @@ var API_BASE = "http://api.globalhack.ninja";
     "date_of_birth":"11/11/1989"
 				*/
 						
- 			   $.post(API_BASE + "/user", postData,
-                function(data) {
-                    alert("Data Loaded: " + data);
-            	});
+				$.ajax({
+				        type: "POST",
+				        url: API_BASE + "/user",
+				        data: JSON.stringify(postData),      // NOTE CHANGE HERE
+				        contentType: "application/json; charset=utf-8",
+				        dataType: "json",
+				        success: function(msg) {
+				            alert(msg);
+				        },
+				        error: function(msg) {
+				        	alert('error');
+				        }
+
+				    });
+						
+						
+						
+			
 			
 			
 			
@@ -225,7 +252,7 @@ var API_BASE = "http://api.globalhack.ninja";
         context.app.swap('');
         context.render('templates/shelters.template', {}).appendTo(context.$element()).then(function(){
 			
-			$.get(BASE_URL + "/shelter", function(data){
+			$.get("http://pg.globalhack.ninja/shelter", function(data){
 				console.log("Done");
 				console.log(data);
 				

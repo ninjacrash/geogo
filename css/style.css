@@ -340,7 +340,7 @@ nav a:hover {
 
 .helpUserNameInput {
 	border: 2px solid #366A7F;
-	width: 300px;
+	width: 340px;
 	height: 30px;
 	color: #366A7F;
 	font-family: Montserrat;
@@ -392,7 +392,7 @@ nav a:hover {
 
 
 .helpTextarea {
-	width: 300px;
+	width: 340px;
 	height: 100px;
 }
 
