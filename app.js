@@ -1,4 +1,5 @@
 var BASE_URL = "http://pg.globalhack.ninja";
+var API_BASE = "http://api.globalhack.ninja";
 
 (function($) {
 
@@ -138,8 +139,8 @@ var BASE_URL = "http://pg.globalhack.ninja";
     			
 				var model = AppModel.getInstance();
 				var postData = {};
-				postData.Id_Type = model.userType;
-				postData.Needs = model.servicesNeeded;
+				//postData.id_type = model.userType;
+				postData.needs = model.servicesNeeded;
 				
 				
 				model.username 	= $(".helpUsername").val();
@@ -158,24 +159,39 @@ var BASE_URL = "http://pg.globalhack.ninja";
 				model.dobYear 		= $(".helpDobYear").val();
 				
 				
-    			postData.Email 	= model.email;
-    			postData.Phone  = model.phone;
-    			postData.Reason = model.reason;
-    			postData.Gender = model.gender;
-    			postData.Veteran = model.veteran;
-    			postData.Education = model.education;
-    			postData.Dependents = model.dependents;
-    			postData.Ethnicity = model.enthnicity;
-    			postData.Homeless = model.homesless;
-    			postData.Employed = model.employed;
-    			postData.Date_Of_Birth = model.dobMonth + "-" + model.dobDay + "-" + model.dobYear;
-					
-					/*		
- 			   $.post("mail.php", this.params,
+				postData.user_id = model.username;
+    			postData.email 	= model.email;
+    			postData.phone  = model.phone;
+    			postData.reason = model.reason;
+    			postData.gender = model.gender;
+    			postData.veteran = model.veteran;
+    			postData.education = model.education;
+    			postData.dependents = model.dependents;
+    			postData.ethnicity = model.enthnicity;
+    			postData.homeless = model.homesless;
+    			postData.employed = model.employed;
+    			postData.date_of_birth = model.dobMonth + "/" + model.dobDay + "/" + model.dobYear;
+				
+					/*
+"user_id":"2jajajajajajajaja@gmail.com",
+    "email":"something@gmail.com",
+    "phone":"314-555-1222",
+    "reason":"lost_job",
+    "password":"jamaica",
+    "gender":"m",
+    "education":"bachelors",
+    "dependents":3,
+    "ethnicity":"black",
+    "homeless":false,
+    "employed":true,
+    "date_of_birth":"11/11/1989"
+				*/
+						
+ 			   $.post(API_BASE + "/user", postData,
                 function(data) {
                     alert("Data Loaded: " + data);
             	});
-			*/
+			
 			
 			
         });
@@ -230,81 +246,6 @@ var BASE_URL = "http://pg.globalhack.ninja";
 				//initMap();
 				
 				
-				function initMap() {
-		          var map = new google.maps.Map(document.getElementById('map'), {
-		            center: {lat: -34.397, lng: 150.644},
-		            zoom: 6
-		          });
-		          var infoWindow = new google.maps.InfoWindow({map: map});
-
-		          // Try HTML5 geolocation.
-		          if (navigator.geolocation) {
-		            navigator.geolocation.getCurrentPosition(function(position) {
-		              var pos = {
-		                lat: position.coords.latitude,
-		                lng: position.coords.longitude
-		              };
-					  
-					  console.log("Position");
-					  console.log(pos);
-
-		              infoWindow.setPosition(pos);
-		              infoWindow.setContent('Location found.');
-		              map.setCenter(pos);
-		            }, function() {
-		              handleLocationError(true, infoWindow, map.getCenter());
-		            });
-		          } else {
-		            // Browser doesn't support Geolocation
-		            handleLocationError(false, infoWindow, map.getCenter());
-		          }
-		        }
-
-		        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		          infoWindow.setPosition(pos);
-		          infoWindow.setContent(browserHasGeolocation ?
-		                                'Error: The Geolocation service failed.' :
-		                                'Error: Your browser doesn\'t support geolocation.');
-		        }
-				
-		        function initMap2()
-				{
-					if (navigator.geolocation) { //Checks if browser supports geolocation
-					   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
-					     var latitude = position.coords.latitude;                    //users current
-					     var longitude = position.coords.longitude;                 //location
-					     var coords = new google.maps.LatLng(latitude, longitude); //Creates variable for map coordinates
-					     var directionsService = new google.maps.DirectionsService();
-					     var directionsDisplay = new google.maps.DirectionsRenderer();
-					     var mapOptions = //Sets map options
-					     {
-					       zoom: 15,  //Sets zoom level (0-21)
-					       center: coords, //zoom in on users location
-					       mapTypeControl: true, //allows you to select map type eg. map or satellite
-					       navigationControlOptions:
-					       {
-					         style: google.maps.NavigationControlStyle.SMALL //sets map controls size eg. zoom
-					       },
-					       mapTypeId: google.maps.MapTypeId.ROADMAP //sets type of map Options:ROADMAP, SATELLITE, HYBRID, TERRIAN
-					     };
-					     map = new google.maps.Map( /*creates Map variable*/ document.getElementById("map"), mapOptions /*Creates a new map using the passed optional parameters in the mapOptions parameter.*/);
-					     directionsDisplay.setMap(map);
-					     directionsDisplay.setPanel(document.getElementById('panel'));
-					     var request = {
-					       origin: coords,
-					       destination: 'BT42 1FL',
-					       travelMode: google.maps.DirectionsTravelMode.DRIVING
-					     };
-						 
-					     directionsService.route(request, function (response, status) {
-					       if (status == google.maps.DirectionsStatus.OK) {
-					         directionsDisplay.setDirections(response);
-					       }
-					     });
-					   });
-					 }
-				}
-				
 				function initMap3() {
 					
 						
@@ -340,12 +281,13 @@ var BASE_URL = "http://pg.globalhack.ninja";
 	 				        directionsDisplay.setMap(map);
 							
 							
-					        calculateAndDisplayRoute(directionsService, directionsDisplay);
+					        //https://maps.googleapis.com/maps/api/geocode/json?&address=st%20louis%2C%20mo
 							
 					        document.getElementById('mode').addEventListener('change', function() {
-					          calculateAndDisplayRoute(directionsService, directionsDisplay);
+					          calculateAndDisplayRoute(directionsService, directionsDisplay, {lat: 40.7366038, lng: -74.0263816}, {lat: 37.768, lng: -122.511});
 					        });
 							
+							calculateAndDisplayRoute(directionsService, directionsDisplay, {lat: 37.77, lng: -122.447}, {lat: 37.768, lng: -122.511});
 							
 							
   		         		   }, function() {
@@ -358,17 +300,14 @@ var BASE_URL = "http://pg.globalhack.ninja";
 							 alert("Location services are not available for your device");
 						 }
 		 			 
-				
-				        
-
 				        
 				      }
 
-				      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+				      function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {
 				        var selectedMode = document.getElementById('mode').value;
 				        directionsService.route({
-				          origin: {lat: 37.77, lng: -122.447},  // Haight.
-				          destination: {lat: 37.768, lng: -122.511},  // Ocean Beach.
+				          origin: origin,  // Haight.
+				          destination: destination,  // Ocean Beach.
 				          // Note that Javascript allows us to access the constant
 				          // using square brackets and a string value as its
 				          // "property."

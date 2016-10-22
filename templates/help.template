@@ -1,6 +1,6 @@
 <div id="help">
 	
-	<div class="stateContainer" id="step1">
+	<div class="stateContainer" id="step1" style="display: none;">
 		<div class="helpLabel">I am a...</div>
 		<div class="buttonContainer">
 			<div class="helpButton step1 iman" value="man">Man</div>
@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	
-	<div class="stateContainer" id="step2" style="display:none;">
+	<div class="stateContainer" id="step2">
 		<div class="helpLabel">I need help with...</div>
 		<div class="buttonContainer">
 			<div class="helpButton step2Button housing" 	value="housing"><div class="helpTextContainer">Housing</div></div>
