@@ -621,3 +621,10 @@ nav a:hover {
 	color: #ffffff;
 	margin: 0px auto;
 }
+
+
+#shelterMap {
+	
+	width: 100%;
+	height: 400px;
+}

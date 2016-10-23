@@ -69,15 +69,25 @@
 		<div class="genButton tallButton shelterPeople">People associated with this shelter</div>
 		<div class="genButton tallButton noAssocPeople">People not associate with any shelter</div>
 		<div class="genButton tallButton newPeople">New entries</div>
-		<div class="genButton tallButton riskPeople">People at risk</div>
+		<!-- <div class="genButton tallButton riskPeople">People at risk</div> -->
 		<div class="genButton tallButton homelessPeople">Homeless people</div>
 	</div>
+	
+	
 	
 	<div class="stateContainer" id="step3" style="display:none;">
 		<div class='peopleMessage'>Click on any of the boxes below to get in contact with the person</div>
 		<div class='peopleList'></div>
 	</div>
 	
+	
+	<div class="stateContainer" id="map" style="display:none;">
+		<div id="shelterMap"></div>
+	</div>
+	
+	<div class="stateContainer" id="charts" style="display:none;">
+		CHARTS SSSSSSSSSS
+	</div>
 	
 	
 </div>

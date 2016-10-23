@@ -116,18 +116,19 @@ var loggedIn = false;
 		$("#theModalContent .premadeButton").click(function(){
 			var model = AppModel.getInstance();
 			$.get("http://sms.globalhack.ninja/send?message=" + model.smsMessage + "&phone=" + model.smsPhone, function(data){
-				console.log(data);
+				//console.log(data);
 				alert("Message sent");
 				//close-animatedModal
 				$("#animatedModal .close-animatedModal").trigger("click");
 			});
 		});
 		
+		
 		$("#theModalContent .smsSendButton").click(function(){
 			var model = AppModel.getInstance();
 			model.smsMessage = $("#theModalContent .theMessage").val();
 			$.get("http://sms.globalhack.ninja/send?message=" + model.smsMessage + "&phone=" + model.smsPhone, function(data){
-				console.log(data);
+				//console.log(data);
 				alert("Message sent");
 				//close-animatedModal
 				$("#animatedModal .close-animatedModal").trigger("click");
@@ -142,6 +143,92 @@ var loggedIn = false;
 	{
 		alert('teaaa');
 	}
+	
+	
+    this.get('#/map/', function(context) {
+		console.log("MAP");
+		if(loggedIn == false)
+		{
+			alert("You must log in first");
+			location.hash = "#/";
+		}
+		
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#step3").hide();
+		$("#map").show();
+		$("#charts").hide();
+		
+		//http://api.globalhack.ninja/closest_shelter?address=884+Judson+Manor&num=10
+		
+		var model = AppModel.getInstance();
+		//console.log(model.orgData);
+		//return;
+		
+		$.get("http://api.globalhack.ninja/closest_shelter?address=" + model.orgData.street_address + "&num=10", function(data){
+				
+			console.log(data);
+			
+			var locations = [];
+			for(var i = 0; i < data.length; i++)
+			{
+				var item = data[i];
+				locations[locations.length] = [item.Shelter_Name + "\n" + item., item.Latitude, item.Longitude];
+			}
+			/*
+			var locations = [
+			      ['Main Street Shelter', 38.6058, -90.2519, 4],
+			      ['Main Street Shelter 2.0', 38.6076, -90.2500, 4],
+			      ['Busch Stadium',38.6226,-90.1928,4]
+			    ];
+			*/
+			    //console.log(locations)
+			    var map = new google.maps.Map(document.getElementById('shelterMap'), {
+			      zoom: 12,
+			      center: new google.maps.LatLng(38.6226,-90.1928),
+			      mapTypeId: google.maps.MapTypeId.ROADMAP
+			    });
+
+			    var infowindow = new google.maps.InfoWindow();
+
+			    var marker, i;
+
+			    for (i = 0; i < locations.length; i++) {  
+			      marker = new google.maps.Marker({
+			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			        map: map
+			      });
+
+			      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			        return function() {
+			          infowindow.setContent(locations[i][0]);
+			          infowindow.open(map, marker);
+			          }
+			      })(marker, i));
+			    }
+				
+				
+		});
+		
+		
+			
+		
+        
+	});
+	
+	
+    
+	this.get('#/charts/', function(context) {
+		console.log("CHARTS");
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#step3").hide();
+		$("#map").hide();
+		$("#charts").show();
+		
+        
+			   
+	});
 	
     this.get('#/', function(context) {
 		$("#step2").hide();
@@ -355,25 +442,7 @@ var loggedIn = false;
 });
 	
 	
-    this.get('#/about/', function(context) {
-		console.log("ets");
-		
-        //var str=location.href.toLowerCase();
-        context.app.swap('');
-        context.render('templates/about.template', {})
-               .appendTo(context.$element());
-    });
-	
    
-	
-    this.get('#/help2/', function(context) {
-		alert("asdf");
-        var str=location.href.toLowerCase();
-        context.app.swap('');
-        context.render('templates/help2.template', {}).appendTo(context.$element()).then(function(){
-			alert("asdf");
-		});
-	});
 	
 	
     this.get('#/shelters/', function(context) {
