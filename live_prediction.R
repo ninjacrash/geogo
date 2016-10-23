@@ -1,14 +1,14 @@
 sink("prediction_log.txt")
 library(jsonlite)
-library("randomForest")
+library(randomForest)
 
 load("RF_model.RData")
 load("training_data.RData")
 train <- t.to.keep
 
 args <- commandArgs(trailingOnly = TRUE)
-#test.person <- "{\"education\":\"high_school\",\"gender\":\"f\",\"reason\":\"lost_job\",\"dependents\":\"2\"}"
-test.person <- args[[1]]
+test.person <- "{\"education\":\"high_school\",\"gender\":\"f\",\"reason\":\"lost_job\",\"dependents\":\"2\"}"
+#test.person <- args[[1]]
 
 new.user<-data.frame(fromJSON(test.person))
 do.factors<-rbind(t.to.keep,new.user)
