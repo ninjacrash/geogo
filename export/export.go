@@ -7,15 +7,15 @@ import(
 	"io/ioutil"
 )
 
-type Schema struct {
-	schema string
-	name string
-	insertable bool
+type SchemaStr []struct {
+	Schema string
+	Name string
+	Insertable bool
 }
 
-type SchemaArr struct {
-	Collection []Schema
-}
+//type SchemaArr struct {
+//	Collection []Schema
+//}
 
 func DataExport(w http.ResponseWriter, r *http.Request) {
 	base_url := "http://pg.globalhack.ninja/"
@@ -30,8 +30,13 @@ func DataExport(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var life_is_pain_to_a_meeseeks SchemaArr
+	var life_is_pain_to_a_meeseeks SchemaStr
 	err = json.Unmarshal([]byte(body), &life_is_pain_to_a_meeseeks)
 	// TODO: loop through tables, tar up, send back
-	fmt.Fprintf(w, "%s", body)
+	for _, meeseek := range life_is_pain_to_a_meeseeks {
+		fmt.Fprintf(w, "%s\n", meeseek.Name)
+	}
+
+	//fmt.Fprintf(w, "%s", life_is_pain_to_a_meeseeks)
+	//fmt.Fprintf(w, "%s", body)
 }
