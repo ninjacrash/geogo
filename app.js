@@ -60,7 +60,7 @@ var loggedIn = false;
 			
 			var person = data[i];
 			console.log(person.phone);
-			person.phone = "3146513545";
+			//person.phone = "3146513545";
 			adiv = "<div class='personEntry person"  + i + "'>"
 			adiv += "	<div class='userRow userPersonId'><div class='userPersonLabel'>User:</div><div class='userPersonValue'> " + person.user_id + "</div></div>";
 			adiv += "	<div class='userRow userEmail'><div class='userPersonLabel'>Email: </div><div class='userPersonValue'>" + person.email + "</div></div>";
