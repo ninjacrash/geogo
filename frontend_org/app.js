@@ -73,18 +73,59 @@ var loggedIn = false;
 			adiv += "	<div class='userRow userEthnicity'><div class='userPersonLabel'>Ethnicity: </div><div class='userPersonValue'>" + person.ethnicity + "</div></div>";
 			adiv += "	<div class='userRow userHomeless'><div class='userPersonLabel'>Homeless: </div><div class='userPersonValue'>" + person.homeless + "</div></div>";
 			adiv += "	<div class='userRow userEmployed'><div class='userPersonLabel'>Employed: </div><div class='userPersonValue'>" + person.employed + "</div></div>";
-			//adiv += "	<a class='contactUser'>Contact user</div>";
+			adiv += "	<button class='userRow userContact'>CONTACT USER</button>";
+			if(person.homeless == true)
+			{
+				adiv += "	<button class='userRow userPrediction' style='pointer-events:none; opacity: 0.5;'>PREDICTIVE ANALYTICS</button>";
+			}
+			else
+			{
+				adiv += "	<button class='userRow userPrediction'>PREDICTIVE ANALYTICS</button>";
+			}
+			
+			
+			//adiv += "	<a   class='contactUser'>Predictive Analysis</div>";
 			adiv += "</div>";
+			
 			
 			var theDiv = $(adiv);
 			$("#step3 .peopleList").append(theDiv);
 			
 			$(theDiv).data("info", person);
+			
 			//console.log($(theDiv).data("info"));
 			
 			//http://api.globalhack.ninja/closest_shelter?lat=38.6226&lon=-90.1928&gender=f&num=20
+			//"{\"education\":\"high_school\",\"gender\":\"f\",\"reason\":\"lost_job\",\"dependents\":\"2\"}" (edited)
+
+			$(theDiv).children('.userPrediction').click(function(){
+				console.log($(theDiv).data("info"));
+				var divData = $(theDiv).data("info");
+				var postData = {};
+				postData.education = divData.education;
+				postData.gender = divData.gender;
+				postData.reason = divData.reason;
+				postData.dependents = divData.dependents;
+				
+				$.ajax({
+				  url: "http://api.globalhack.ninja/predict",
+				  type:"POST",
+				  data:JSON.stringify(postData),
+				  contentType:"application/json; charset=utf-8",
+				  dataType:"json",
+				  success: function(data){
+				    console.log(data);
+					alertify.success((Number(data[0]["RF.prediction.YES"])*100).toFixed(2) + " chance of becoming homeless");
+					
+					//[{"nu.user_id":"newuser_newid","RF.prediction.category":"YES","RF.prediction.NO":0.298,"RF.prediction.YES":0.702}] 
+					
+				  }
+				});
+				
+				
+			});
 			
-			$(theDiv).click(function(){
+			$(theDiv).children('.userContact').click(function(){
 				var model = AppModel.getInstance();
 				
 				var info = $(this).data("info");
@@ -150,7 +191,7 @@ var loggedIn = false;
 		console.log("MAP");
 		if(loggedIn == false)
 		{
-			alert("You must log in first");
+			alertify.success("You must log in first");
 			location.hash = "#/";
 		}
 		

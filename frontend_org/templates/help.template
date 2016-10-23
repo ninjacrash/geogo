@@ -90,6 +90,7 @@
 	<div class="stateContainer" id="charts" style="display:none;">
 		<div class="chartLabel">Total Homeless VS Homeless in Shelter
 		<div id="numberOfPeopleInShelter"></div>
+		<div id="individualProgress"></div>
 	</div>
 	
 	

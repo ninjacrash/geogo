@@ -501,23 +501,20 @@ nav a:hover {
 	text-align: center;
 	margin: 0px auto;
 }
-.personEntry:hover {
-	background-color: #1FBFFF;
-	color: #ffffff;
-}
+
 .personEntry {
 	font-family: Montserrat;
 	font-size: 12px;
 	max-width: 300px;
 	width: 100%;
 	margin: 0px auto;
-	background-color: #dddddd;
+	background-color: #1FBFFF;
+	color: #ffffff;
 	display: inline-block;
 	padding: 10px;
 	margin-right: 10px;
-	margin-down: 10px;
+	margin-bottom: 10px;
 	border-radius: 5px;
-	cursor:pointer;
 }
 
 #step3 {
@@ -629,10 +626,7 @@ nav a:hover {
 	height: 400px;
 }
 
-.title {
-	font-family: Montserrat;
-	margin-top: 25px;
-}
+
 #logo{
 	margin-top: 20px;
 	margin-right: 20px;
@@ -652,3 +646,29 @@ nav a:hover {
 	font-size: 16px;
 	color: #366A7F;
 }
+
+.userContact {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	height: 32px;
+	color: #252525;
+}
+
+.userPrediction {
+	height: 32px;
+	color: #252525;
+}
+.title {
+	font-family: Montserrat;
+	margin-top: 25px;
+}
+.subtitle {
+	font-size:12px;
+}
+
+.peopleMessage {
+	font-family: Montserrat;
+	font-size: 16px;
+	color: #366A7F;
+}
+
