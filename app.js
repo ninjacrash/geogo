@@ -187,6 +187,10 @@ var loggedIn = false;
 		$("#map").hide();
 		$("#charts").show();
 				   
+		var cd = new ChartDelegate();
+		cd.createRecidivismChart();
+		
+		
 	});
 	
     this.get('#/', function(context) {

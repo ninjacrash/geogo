@@ -88,7 +88,8 @@
 	</div>
 	
 	<div class="stateContainer" id="charts" style="display:none;">
-		Charts
+		<div class="chartLabel">Total Homeless VS Homeless in Shelter
+		<div id="numberOfPeopleInShelter"></div>
 	</div>
 	
 	
