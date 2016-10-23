@@ -29,7 +29,13 @@ type Final_Response struct{
 
 func Geolocate(w http.ResponseWriter, r *http.Request) {
   fmt.Println("GET params were:", r.URL.Query());
-
+  w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+  w.Header().Set("Access-Control-Allow-Headers", "Content-type")
+  w.Header().Set("Access-Control-Allow-Origin", "*")
+  // Stop here if its Preflighted OPTIONS request
+  if r.Method == "OPTIONS" {
+      return
+  }
   var addr string
 
   for key, value := range r.URL.Query() {

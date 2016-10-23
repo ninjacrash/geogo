@@ -1,5 +1,5 @@
-hash: 73cfc933ac84bc7e9eecb197f645897bb147bc30cedfd528676a4a159b450183
-updated: 2016-10-22T13:32:15.924289444-05:00
+hash: 92dc3db6aa81ff595eff855348d79a2803ef1e08992d57dc9a221311702cf241
+updated: 2016-10-22T21:17:46.926939929-05:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
@@ -9,4 +9,8 @@ imports:
   version: ae8357db35d721c58dcdc911318b55bef6b1b001
   subpackages:
   - oid
+- name: github.com/paulsmith/gogeos
+  version: 21f81b2ea5af44d3f6029cc3e5bbbd26b2425236
+  subpackages:
+  - geos
 testImports: []

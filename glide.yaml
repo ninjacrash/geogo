@@ -2,3 +2,7 @@ package: github.com/ninjacrash/geogo
 import:
 - package: github.com/gorilla/mux
 - package: github.com/lib/pq
+- package: github.com/paulsmith/gogeos
+  version: ~0.1.2
+  subpackages:
+  - geos
