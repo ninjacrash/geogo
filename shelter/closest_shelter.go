@@ -16,6 +16,16 @@ type Geo_Response []struct{
   Latitude float64
   Longitude float64
 	Distance float64
+	Shelter_Id int
+	Population int
+	Capacity int
+	Pct_Occupied float64
+	Gender_Restriction string
+}
+
+type Lat_Long struct{
+  Lat float64
+  Long float64
 }
 
 func (slice Geo_Response) Len() int {
@@ -62,7 +72,7 @@ func Distance_Between(lat1, lon1, lat2, lon2 float64) float64 {
 }
 
 func Get_Shelters() (Geo_Response, error) {
-  pg_url := "http://pg.globalhack.ninja/shelter?city=eq.St.%20Louis&select=shelter_name,latitude,longitude"
+  pg_url := "http://pg.globalhack.ninja/shelter_capacity"
   response, err := http.Get(pg_url)
 	var jr Geo_Response
 	if err != nil{
@@ -96,7 +106,11 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 
     var lat_str string
     var lon_str string
+		var lat float64
+		var lon float64
 		var record_limit int = 3
+		var user_gender string = "no_conflicts"
+		var address string = ""
 
     for key, value := range req.URL.Query() {
       if key == "lat" || key == "latitude" {
@@ -111,22 +125,38 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 						return
 					}
 					record_limit = limit_int
+			} else if key == "gender" {
+					user_gender = value[0]
+			} else if key == "address" {
+				  address = url.QueryEscape(value[0])
 			}
-
 			//fmt.Println("Key:", key, "Value:", value[0])
     }
-    lat, err := strconv.ParseFloat(lat_str, 64)
-    if err != nil {
-      http.Error(w, `[{}]`, http.StatusNotFound)
-      return
-    }
-    lon, err := strconv.ParseFloat(lon_str, 64)
-    if err != nil {
-      http.Error(w, `[{}]`, http.StatusNotFound)
-      return
-    }
+		if address != "" {
+			api_url := "http://api.globalhack.ninja/geo?address=" + address
+			fmt.Println(api_url)
+			resp, err := http.Get(api_url)
+			if err != nil {
+				fmt.Println("Failed to query geo API")
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+			raw_json, err := ioutil.ReadAll(resp.Body)
+			if err != nil {
+				fmt.Println("Failed to read response body")
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+    	defer resp.Body.Close()
+			var ll Lat_Long
+			err = json.Unmarshal([]byte(raw_json), &ll)
+			lat = ll.Lat
+			lon = ll.Long
+		} else {
+			lat, _ = strconv.ParseFloat(lat_str, 64)
+	    lon, _ = strconv.ParseFloat(lon_str, 64)
+		}
+
     var gr Geo_Response
-    gr, err = Get_Shelters()
+    gr, err := Get_Shelters()
 		if err != nil {
       http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -135,6 +165,9 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 		for i, shelter := range gr {
 			gr[i].Distance = Distance_Between(shelter.Latitude,	shelter.Longitude,
 																					lat, lon)
+			if shelter.Population > shelter.Capacity ||	shelter.Gender_Restriction == user_gender {
+				gr[i].Distance = 9999999.0000
+			}
 		}
 
 		sort.Sort(gr)

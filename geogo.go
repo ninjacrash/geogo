@@ -11,6 +11,7 @@ import (
 	"github.com/ninjacrash/geogo/shelter"
 	"github.com/ninjacrash/geogo/share"
 	"github.com/ninjacrash/geogo/prediction"
+	"github.com/ninjacrash/geogo/sms"
 )
 
 func main() {
@@ -29,7 +30,7 @@ func main() {
 	r.HandleFunc("/import", share.DataImport)
 	r.HandleFunc("/predict", prediction.Predict)
 	r.HandleFunc("/closest_shelter", shelter.Get_Closest_Shelter)
-
+	r.HandleFunc("/sms", sms.SendMessage)
 
 	http.Handle("/", r)
 	fmt.Printf("server started on port %s\n", port)
