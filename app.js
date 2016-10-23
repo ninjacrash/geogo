@@ -170,6 +170,7 @@ var API_BASE = "http://api.globalhack.ninja";
 					model.uuid = uuidNum;
 					postData.user_id = model.uuid;
 					
+					alert("Your user id is: " + model.uuid + " write this down as you will need it in the future");
 					$("#generatedUUID").html(model.uuid);
 				}
 				
@@ -207,10 +208,10 @@ var API_BASE = "http://api.globalhack.ninja";
 				        contentType: "application/json; charset=utf-8",
 				        dataType: "json",
 				        success: function(msg) {
-				            alert(msg);
+				            alert("ss" + msg);
 				        },
 				        error: function(msg) {
-				        	alert('error');
+				        	alert('R');
 				        }
 
 				    });
@@ -277,7 +278,7 @@ var API_BASE = "http://api.globalhack.ninja";
 					
 						
   		          
-				  
+				  	
 				  		var pos;
   		         		 if (navigator.geolocation) 
 						 {
@@ -326,7 +327,7 @@ var API_BASE = "http://api.globalhack.ninja";
 						 {
 							 alert("Location services are not available for your device");
 						 }
-		 			 
+		 			 	
 				        
 				      }
 
@@ -357,7 +358,7 @@ var API_BASE = "http://api.globalhack.ninja";
 				
 				
 				
-				initMap3();
+				//initMap3();
 				
 				
 				

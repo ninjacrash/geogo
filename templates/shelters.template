@@ -6,7 +6,7 @@
 	
 	<div id="shelterList">
 		<div class="shelterListLabel">Shelters</div>
-		
+		<!--
 		<div id="floating-panel">
 		    <b>Mode of Travel: </b>
 		    <select id="mode">
@@ -16,9 +16,10 @@
 		      <option value="TRANSIT">Transit</option>
 		    </select>
 		    </div>
-			
+		
 			
 		<div id="map"></div>
+		-->
 		<div id="shelterListInner"></div>
 	</div>
 
