@@ -52,6 +52,22 @@ var loggedIn = false;
 	
 	
 	
+	this.populatePeople = function(data)
+	{
+		var adiv;
+		for(var i = 0; i < data.length; i++)
+		{
+			var person = data[i];
+			adiv = "<div class='personEntry'>"
+			adiv += "	<div class='personId'>" + person.user_id + "</div>";
+			adiv += "	<div class='email'>" + person.email + "</div>";
+			adiv += "	<div class='personId'>" + person.phone + "</div>";
+			adiv += "	<div class='personId'>" + person.user_id + "</div>";
+			adiv += "	<div class='personId'>" + person.user_id + "</div>";
+			adiv += "</div>";
+		}
+	}
+	
     this.get('#/', function(context) {
 		$("#step2").hide();
 		$("#step3").hide();
@@ -113,8 +129,6 @@ var loggedIn = false;
 			});
 				
 				
-			
-			
 			$(".allPeople").click(function(){
 				//http://pg.globalhack.ninja/user
 				$.get("http://pg.globalhack.ninja/user", function(data){
@@ -123,143 +137,129 @@ var loggedIn = false;
 			});
 			
 			$(".shelterPeople").click(function(){
+				var model = AppModel.getInstance();
 				$.get("http://pg.globalhack.ninja/user?shelter_id=eq." + model.orgData.org_id, function(data){
 					console.log(data);
 				});
 			});
 			
-			$(".otherPeople").click(function(){
-				
-			});
 			
 			$(".noAssocPeople").click(function(){
-				
+				$.get("http://pg.globalhack.ninja/user?shelter_id=is.null", function(data){
+					console.log(data);
+				});
 			});
 			
 			$(".newPeople").click(function(){
+				
+				
+				var dt = moment().startOf('month');
+				var theDate = dt.format("YYYY-MM-DD");
+				$.get("http://pg.globalhack.ninja/user?create_dt=gte." + theDate, function(data){
+					console.log(data);
+				});
 				
 			});
 			
 			$(".riskPeople").click(function(){
 				
+				
+				
 			});
 			
-			
-			//STEP 2
-			$(".housing").click(function(){
-				root.handleItemClick(this);
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".food").click(function(){
-				root.handleItemClick(this);
-				var del1 = HelpDelegate.getInstance();
-				
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".hygine").click(function(){
-				root.handleItemClick(this);
-				
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".casemgmt").click(function(){
-				root.handleItemClick(this);
-				
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".employment").click(function(){
-				root.handleItemClick(this);
-				
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".money").click(function(){
-				root.handleItemClick(this);
-				
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
-			});
-			$(".other").click(function(){
-				root.handleItemClick(this);
-				
-				var del1 = HelpDelegate.getInstance();
-				//del1.handleStep2Click(AppModel.ANONYMOUS);
+			$(".homelessPeople").click(function(){
+				$.get("http://pg.globalhack.ninja/user?homeless=is.true", function(data){
+					console.log(data);
+				});
 			});
 			
-			
-			$(".nextButton").click(function(){
+			$(".sendPeople").click(function(){
+				
+				str = "http://pg.globalhack.ninja/user?";
 				var model = AppModel.getInstance();
-				model.servicesNeeded = root.getHelpNeeded();
-				$("#step2").hide();
-				$("#step3").show();
 				
-				//console.log(model.servicesNeeded);
-				//console.log(model.userType);
+				var vet = $(".veteranSelect").val();
+				if(vet == "true")
+				{
+					str += "veteran=eq.true&";
+				}
+				else if(vet == "false")
+				{
+					str += "veteran=eq.false&";
+				}
+				
+				var hom = $(".homelessSelect").val();
+				if(hom == "true")
+				{
+					str += "homeless=eq.true&";
+				}
+				else if(hom == "false")
+				{
+					str += "homeless=eq.false&";
+				}
+				
+				var emp = $(".employedSelect").val();
+				if(emp == "true")
+				{
+					str += "employed=eq.true&";
+				}
+				else if(emp == "false")
+				{
+					str += "employed=eq.false&";
+				}
+				
+				var fam = $(".familySelect").val();
+				if(fam == "true")
+				{
+					str += "dependents=gt.0&";
+				}
+				else if(emp == "false")
+				{
+					str += "dependents=eq.0&";
+				}
+				
+				var gen = $(".genderSelect").val();
+				if(gen == "true")
+				{
+					str += "gender=eq.f&";
+				}
+				else if(gen == "false")
+				{
+					str += "gender=eq.m&";
+				}
+				
+				
+				var org = $(".orgSelect").val();
+				
+				str += "";
+				$.get("http://pg.globalhack.ninja/org?select=org_id&org_name=eq." + org, function(data){
+					
+					str += "shelter_id=eq." + data[0].org_id;
+					$.get(str, function(data){
+						console.log(data);
+					});
+					
+				});
+				
+				//http://pg.globalhack.ninja/org?select=org_id&org_name=eq.
+				//http://sms.globalhack.ninja/send?message=Hi%20Shay&phone=3146513545
+				
+				
+				
+				
+				
+				
 			});
 			
-			$(".helpSendButton").click(function(){
-				
-    			
-				var model = AppModel.getInstance();
-				var postData = {};
-				//postData.id_type = model.userType;
-				postData.needs = model.servicesNeeded;
-				
-				
-				model.username 	= $(".helpUsername").val();
-				model.email 		= $(".helpEmail").val();
-				model.phone 		= $(".helpPhone").val();
-				model.reason 		= $(".helpReason").val();
-				model.gender 		= $(".helpGender").val();
-				model.veteran		= $(".helpVeteran").val() == "on" ? true : false;
-				model.education 	= $(".helpEducation").val();
-				model.dependents 	= $(".helpDependents").val();
-				model.enthnicity	= $(".helpEthnicity").val();
-				model.homesless 	= $(".helpHomeless").val() == "on" ? true : false;
-				model.employed 		= $(".helpEmployed").val() == "on" ? true : false;
-				model.dobMonth 		= $(".helpDobMonth").val();
-				model.dobDay	 	= $(".helpDobDay").val();
-				model.dobYear 		= $(".helpDobYear").val();
-				
-				
-				postData.user_id = model.username;
-    			postData.email 	= model.email;
-    			postData.phone  = model.phone;
-    			postData.reason = model.reason;
-    			postData.gender = model.gender;
-    			postData.veteran = model.veteran;
-    			postData.education = model.education;
-    			postData.dependents = model.dependents;
-    			postData.ethnicity = model.enthnicity;
-    			postData.homeless = model.homesless;
-    			postData.employed = model.employed;
-    			postData.date_of_birth = model.dobMonth + "/" + model.dobDay + "/" + model.dobYear;
-				
-					/*
-"user_id":"2jajajajajajajaja@gmail.com",
-    "email":"something@gmail.com",
-    "phone":"314-555-1222",
-    "reason":"lost_job",
-    "password":"jamaica",
-    "gender":"m",
-    "education":"bachelors",
-    "dependents":3,
-    "ethnicity":"black",
-    "homeless":false,
-    "employed":true,
-    "date_of_birth":"11/11/1989"
-				*/
-						
+			/*
  			   $.post(API_BASE + "/user", postData,
                 function(data) {
                     alert("Data Loaded: " + data);
             	});
+			*/
 			
 			
 			
-        });
     });
 });
 	
