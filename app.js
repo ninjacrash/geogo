@@ -57,15 +57,79 @@ var loggedIn = false;
 		var adiv;
 		for(var i = 0; i < data.length; i++)
 		{
+			
 			var person = data[i];
-			adiv = "<div class='personEntry'>"
-			adiv += "	<div class='personId'>" + person.user_id + "</div>";
-			adiv += "	<div class='email'>" + person.email + "</div>";
-			adiv += "	<div class='personId'>" + person.phone + "</div>";
-			adiv += "	<div class='personId'>" + person.user_id + "</div>";
-			adiv += "	<div class='personId'>" + person.user_id + "</div>";
+			console.log(person.phone);
+			person.phone = "3146513545";
+			adiv = "<div class='personEntry person"  + i + "'>"
+			adiv += "	<div class='userRow userPersonId'><div class='userPersonLabel'>User:</div><div class='userPersonValue'> " + person.user_id + "</div></div>";
+			adiv += "	<div class='userRow userEmail'><div class='userPersonLabel'>Email: </div><div class='userPersonValue'>" + person.email + "</div></div>";
+			adiv += "	<div class='userRow userPhone'><div class='userPersonLabel'>Phone: </div><div class='userPersonValue'>" + person.phone + "</div></div>";
+			adiv += "	<div class='userRow userGender'><div class='userPersonLabel'>Gender: </div><div class='userPersonValue'>" + person.gender + "</div></div>";
+			adiv += "	<div class='userRow userVeteran'><div class='userPersonLabel'>Veteran: </div><div class='userPersonValue'>" + person.veteran + "</div></div>";
+			adiv += "	<div class='userRow userEducation'><div class='userPersonLabel'>Education: </div><div class='userPersonValue'>" + person.education + "</div></div>";
+			adiv += "	<div class='userRow userDependents'><div class='userPersonLabel'>Dependents: </div><div class='userPersonValue'>" + person.dependents + "</div></div>";
+			adiv += "	<div class='userRow userEthnicity'><div class='userPersonLabel'>Ethnicity: </div><div class='userPersonValue'>" + person.ethnicity + "</div></div>";
+			adiv += "	<div class='userRow userHomeless'><div class='userPersonLabel'>Homeless: </div><div class='userPersonValue'>" + person.homeless + "</div></div>";
+			adiv += "	<div class='userRow userEmployed'><div class='userPersonLabel'>Employed: </div><div class='userPersonValue'>" + person.employed + "</div></div>";
+			//adiv += "	<a class='contactUser'>Contact user</div>";
 			adiv += "</div>";
+			
+			var theDiv = $(adiv);
+			$("#step3 .peopleList").append(theDiv);
+			
+			$(theDiv).data("info", person);
+			//console.log($(theDiv).data("info"));
+			
+			//http://api.globalhack.ninja/closest_shelter?lat=38.6226&lon=-90.1928&gender=f&num=20
+			
+			$(theDiv).click(function(){
+				var model = AppModel.getInstance();
+				
+				var info = $(this).data("info");
+				console.log(model.orgData);
+				
+				$("#animatedModal").css("display", "block");
+				$("#demo01").trigger("click");
+				$("#theModalContent .theUser").html(info.user_id);
+				$("#theModalContent .theNumber").html(info.phone);
+				
+				var smsMessage = "Hi this is " + model.orgData.org_name + "\n";
+				smsMessage += "Contact us at this address or by phone \n";
+				smsMessage += "Address: " + model.orgData.street_address + ", " + model.orgData.city + " " + model.orgData.state + "\n";
+				smsMessage += "Phone: " + model.orgData.phone + "\n";
+				smsMessage += "to schedule a consultation";
+				
+				console.log(smsMessage);
+				
+				model.smsPhone = info.phone;
+				model.smsMessage = smsMessage;
+				//model.smsOrgName = model.orgData.org_name;
+				//model.smsAddress = model.orgData.smsAddress;
+				
+				//http://sms.globalhack.ninja/send?message=Hi%20Shay&phone=3146513545
+				
+			});
+			
 		}
+		
+		$("#theModalContent .premadeButton").click(function(){
+			var model = AppModel.getInstance();
+			$.get("http://sms.globalhack.ninja/send?message=" + model.smsMessage + "&phone=" + model.smsPhone, function(data){
+				console.log(data);
+				alert("Message sent");
+				//close-animatedModal
+				$("#animatedModal .close-animatedModal").trigger("click");
+			});
+		});
+		
+		$("#demo01").animatedModal();
+		
+	}
+	
+	this.handlePersonClick = function(person)
+	{
+		alert('teaaa');
 	}
 	
     this.get('#/', function(context) {
@@ -119,7 +183,7 @@ var loggedIn = false;
 				var adiv = "<select class='orgSelect'>";
 				for(var i = 0; i < data.length; i++)
 				{
-					console.log(data[i]);
+					//console.log(data[i]);
 					var orgName = data[i].org_name;
 					adiv += "<option value='" + orgName + "'>" + orgName + "</option>";
 				}
@@ -128,11 +192,14 @@ var loggedIn = false;
 				$("#filterBox").append(adiv);
 			});
 				
-				
+			
 			$(".allPeople").click(function(){
 				//http://pg.globalhack.ninja/user
 				$.get("http://pg.globalhack.ninja/user", function(data){
 					console.log(data);
+					$("#step2").hide();
+					$("#step3").show();
+					root.populatePeople(data);
 				});
 			});
 			
@@ -140,6 +207,9 @@ var loggedIn = false;
 				var model = AppModel.getInstance();
 				$.get("http://pg.globalhack.ninja/user?shelter_id=eq." + model.orgData.org_id, function(data){
 					console.log(data);
+					$("#step2").hide();
+					$("#step3").show();
+					root.populatePeople(data);
 				});
 			});
 			
@@ -147,6 +217,9 @@ var loggedIn = false;
 			$(".noAssocPeople").click(function(){
 				$.get("http://pg.globalhack.ninja/user?shelter_id=is.null", function(data){
 					console.log(data);
+					$("#step2").hide();
+					$("#step3").show();
+					root.populatePeople(data);
 				});
 			});
 			
@@ -157,19 +230,23 @@ var loggedIn = false;
 				var theDate = dt.format("YYYY-MM-DD");
 				$.get("http://pg.globalhack.ninja/user?create_dt=gte." + theDate, function(data){
 					console.log(data);
+					$("#step2").hide();
+					$("#step3").show();
+					root.populatePeople(data);
 				});
 				
 			});
 			
 			$(".riskPeople").click(function(){
 				
-				
-				
 			});
 			
 			$(".homelessPeople").click(function(){
 				$.get("http://pg.globalhack.ninja/user?homeless=is.true", function(data){
 					console.log(data);
+					$("#step2").hide();
+					$("#step3").show();
+					root.populatePeople(data);
 				});
 			});
 			
@@ -236,7 +313,10 @@ var loggedIn = false;
 					
 					str += "shelter_id=eq." + data[0].org_id;
 					$.get(str, function(data){
-						console.log(data);
+						//console.log(data);
+						$("#step2").hide();
+						$("#step3").show();
+						root.populatePeople(data);
 					});
 					
 				});

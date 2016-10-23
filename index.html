@@ -13,12 +13,50 @@
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">	
   
   <script src="app.js"></script>
 </head>
 
 <body>
+	
+	
+   <!--Call your modal-->
+       <a id="demo01" href="#animatedModal" style="display:none;">DEMO01</a>
+	   
+       <!--DEMO01-->
+       <div id="animatedModal" style="display: none;">
+           <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
+           <div class="close-animatedModal" style="cursor:pointer;"> 
+               CLOSE MODAL
+           </div>
+            
+           <div class="modal-content" id="theModalContent">
+                     <!--Your modal content goes here-->
+					 <div class="messageInstructions">Select one of the pre-made messages or fill in your custom message and click send</div>
+					 <div class='theUser'></div>
+					 <div class='theNumber'></div>
+					 <br/>
+					 
+					 <div class='theUserSpaceReady premadeButton'>Tell user you have a space ready for them, by clicking here</div>
+					 <br/>
+					 <br/>
+					 
+					 
+					 
+					 
+					 
+					 <textarea class='theMessage' placeholder="Custom message"></textarea>
+           </div>
+		   
+		   <div class='smsSendButton'>SEND</div>
+       </div>
+   
+  
+	
+	
+	
   <div class="header-container">
     <header class="wrapper clearfix">
       <h1 class="title">Organization</h1>
@@ -39,7 +77,6 @@
   </div>
   <div class="footer-container">
     <footer class="wrapper">
-      <h3>Ninja Crash</h3>
     </footer>
   </div>
   
@@ -48,6 +85,9 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADfG_-BOFHLpJIpgcGEVpIDeqNvspuOy0">
     </script>
+	
+    <script src="js/animatedModal.min.js" type="text/javascript"></script>
+	
 	
 </body>
 

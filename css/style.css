@@ -495,3 +495,99 @@ nav a:hover {
 #filterBox {
 	
 }
+
+.peopleList {
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+}
+.personEntry:hover {
+	background-color: #1FBFFF;
+	color: #ffffff;
+}
+.personEntry {
+	font-family: Montserrat;
+	font-size: 12px;
+	max-width: 300px;
+	width: 100%;
+	margin: 0px auto;
+	background-color: #dddddd;
+	display: inline-block;
+	padding: 10px;
+	margin-right: 10px;
+	margin-down: 10px;
+	border-radius: 5px;
+	cursor:pointer;
+}
+
+#step3 {
+	z-index: 1000;
+}
+.userPersonLabel {
+	float:left;
+	height: 20px;
+}
+
+.userPersonValue {
+	float:right;
+	font-weight: bold;
+	height: 20px;
+}
+
+.userRow {
+	width: 100%;
+	height: 25px;
+	display: block;
+	clear:both;
+}
+
+.theMessage {
+	font-family: Montserrat;
+	font-size: 12px;
+	max-width: 300px;
+	width: 100%;
+	margin: 0px auto;
+	background-color: #dddddd;
+	display: inline-block;
+	padding: 10px;
+	margin-right: 10px;
+	margin-down: 10px;
+	border-radius: 5px;
+	cursor:pointer;
+	
+	max-width: 500px;
+	width: 100%;
+}
+
+#animatedModal {
+	padding-top: 50px;
+	color: #ffffff;
+	background-color: #1FBFFF !important;
+	text-align: center;
+}
+
+.theUser {
+	clear: both;
+}
+.theNumber
+{	 
+	clear: both;
+}
+.theMessage {
+	margin: 0px auto;
+}
+
+.premadeButton {
+	cursor:pointer;
+	font-family: Montserrat;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 200px;
+	height: 40px;
+	line-height: 1;
+	padding-top: 10px;
+	background-color: #366A7F;
+	color: #ffffff;
+	margin: 0px auto;
+}

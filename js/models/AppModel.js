@@ -22,8 +22,8 @@ class AppModel {
 		
 		this.orgData = null;
 		
-		
-		
+		this.smsPhone = "";
+		this.smsMessage = "";
 	
 	  }
 }
