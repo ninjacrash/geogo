@@ -6,6 +6,7 @@ import(
 	"os/exec"
 	"bytes"
 	"log"
+	"io/ioutil"
 )
 
 func Predict(w http.ResponseWriter, r *http.Request) {
