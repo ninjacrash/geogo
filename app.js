@@ -169,7 +169,7 @@ var loggedIn = false;
 		
 		$.get("http://api.globalhack.ninja/closest_shelter?address=" + model.orgData.street_address + "&num=10", function(data){
 				
-			console.log(data);
+			//console.log(data);
 			//http://pg.globalhack.ninja/shelter?shelter_id=eq.1
 			
 			
@@ -180,12 +180,10 @@ var loggedIn = false;
 			for(var i = 0; i < data.length; i++)
 			{
 				var theData = data[i];
-				//console.log(theData);
-				//console.log(theData.Shelter_Id);
 				
 				items["item" + theData.Shelter_Id] = theData;
 				$.get("http://pg.globalhack.ninja/shelter?shelter_id=eq." + theData.Shelter_Id, function(xdata){
-					console.log("Got data----------------------");
+					//console.log("Got data----------------------");
 					
 					
 					var sid = xdata[0].shelter_id;
@@ -201,37 +199,16 @@ var loggedIn = false;
 						{
 							locations[locations.length] = [items[xx].Shelter_Name + "<br/>" + items[xx].street_address + ", " + items[xx].city  + " " + items[xx].state + "<br/>" + items[xx].phone, items[xx].Latitude, items[xx].Longitude];
 						}
-						//console.log("Locatios");
-						//console.log(locations);
 						root.createMap(locations);
 					}
 					
-					//console.log("----------");
-					//console.log(items["item" + sid]);
 				});
 				
-				var item = data[i];
-				//locations[locations.length] = [item.Shelter_Name + "\n", item.Latitude, item.Longitude];
 				
 			}
 			
-			
-			/*
-			var locations = [
-			      ['Main Street Shelter', 38.6058, -90.2519, 4],
-			      ['Main Street Shelter 2.0', 38.6076, -90.2500, 4],
-			      ['Busch Stadium',38.6226,-90.1928,4]
-			    ];
-			*/
-			    //console.log(locations)
-			    
-				
 		});
 		
-		
-			
-		
-        
 	});
 	
 	
