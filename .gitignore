@@ -3,3 +3,4 @@ nohup.out
 bin/
 vendor/
 *.txt
+node_modules/
