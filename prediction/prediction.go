@@ -9,7 +9,7 @@ import(
 )
 
 func Predict(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-type")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	// Stop here if its Preflighted OPTIONS request
