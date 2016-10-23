@@ -13,7 +13,7 @@ func Predict(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-type")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	// Stop here if its Preflighted OPTIONS request
-	if req.Method == "OPTIONS" {
+	if r.Method == "OPTIONS" {
 			return
 	}
 	js, err := ioutil.ReadAll(r.Body)
