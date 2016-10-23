@@ -59,6 +59,7 @@ var loggedIn = false;
 		{
 			
 			var person = data[i];
+			
 			console.log(person.phone);
 			//person.phone = "3146513545";
 			adiv = "<div class='personEntry person"  + i + "'>"
@@ -165,16 +166,56 @@ var loggedIn = false;
 		//console.log(model.orgData);
 		//return;
 		
+		
 		$.get("http://api.globalhack.ninja/closest_shelter?address=" + model.orgData.street_address + "&num=10", function(data){
 				
 			console.log(data);
+			//http://pg.globalhack.ninja/shelter?shelter_id=eq.1
+			
 			
 			var locations = [];
+			var items = [];
+			var doneCount = 0;
+			
 			for(var i = 0; i < data.length; i++)
 			{
+				var theData = data[i];
+				//console.log(theData);
+				//console.log(theData.Shelter_Id);
+				
+				items["item" + theData.Shelter_Id] = theData;
+				$.get("http://pg.globalhack.ninja/shelter?shelter_id=eq." + theData.Shelter_Id, function(xdata){
+					console.log("Got data----------------------");
+					
+					
+					var sid = xdata[0].shelter_id;
+					for(var x in xdata[0])
+					{
+						items["item" + sid][x] = xdata[0][x];
+					}
+					
+					doneCount++;
+					if(doneCount >= data.length)
+					{
+						for(var xx in items)
+						{
+							locations[locations.length] = [items[xx].Shelter_Name + "<br/>" + items[xx].street_address + ", " + items[xx].city  + " " + items[xx].state + "<br/>" + items[xx].phone, items[xx].Latitude, items[xx].Longitude];
+						}
+						//console.log("Locatios");
+						//console.log(locations);
+						root.createMap(locations);
+					}
+					
+					//console.log("----------");
+					//console.log(items["item" + sid]);
+				});
+				
 				var item = data[i];
-				locations[locations.length] = [item.Shelter_Name + "\n" + item., item.Latitude, item.Longitude];
+				//locations[locations.length] = [item.Shelter_Name + "\n", item.Latitude, item.Longitude];
+				
 			}
+			
+			
 			/*
 			var locations = [
 			      ['Main Street Shelter', 38.6058, -90.2519, 4],
@@ -183,30 +224,7 @@ var loggedIn = false;
 			    ];
 			*/
 			    //console.log(locations)
-			    var map = new google.maps.Map(document.getElementById('shelterMap'), {
-			      zoom: 12,
-			      center: new google.maps.LatLng(38.6226,-90.1928),
-			      mapTypeId: google.maps.MapTypeId.ROADMAP
-			    });
-
-			    var infowindow = new google.maps.InfoWindow();
-
-			    var marker, i;
-
-			    for (i = 0; i < locations.length; i++) {  
-			      marker = new google.maps.Marker({
-			        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-			        map: map
-			      });
-
-			      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-			        return function() {
-			          infowindow.setContent(locations[i][0]);
-			          infowindow.open(map, marker);
-			          }
-			      })(marker, i));
-			    }
-				
+			    
 				
 		});
 		
@@ -217,7 +235,33 @@ var loggedIn = false;
 	});
 	
 	
-    
+    this.createMap = function(locations)
+	{
+	    var map = new google.maps.Map(document.getElementById('shelterMap'), {
+	      zoom: 12,
+	      center: new google.maps.LatLng(38.6226,-90.1928),
+	      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    });
+		
+	    var infowindow = new google.maps.InfoWindow();
+		
+	    var marker, i;
+
+	    for (i = 0; i < locations.length; i++) {  
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
+		  
+	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent(locations[i][0]);
+	          infowindow.open(map, marker);
+	          }
+	      })(marker, i));
+	    }
+	}
+	
 	this.get('#/charts/', function(context) {
 		console.log("CHARTS");
 		$("#step1").hide();
@@ -225,9 +269,7 @@ var loggedIn = false;
 		$("#step3").hide();
 		$("#map").hide();
 		$("#charts").show();
-		
-        
-			   
+				   
 	});
 	
     this.get('#/', function(context) {
