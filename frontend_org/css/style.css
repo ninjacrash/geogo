@@ -1,0 +1,654 @@
+/*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #0F5F7F;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+img {
+    vertical-align: middle;
+}
+
+
+
+body {
+    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+
+article a{
+  color:#c34f4b;
+  text-decoration:none;
+}
+article a:hover{
+  color:#666;
+
+}
+
+.header-container {
+    border-bottom: 20px solid #366A7F;
+}
+
+.footer-container {
+    border-top: 20px solid #366A7F;
+}
+
+.header-container,
+.footer-container{
+    background: #1FBFFF;
+}
+
+.title {
+    color: white;
+}
+
+.back{
+    float: left;
+    margin: 10px 5px;
+    padding: 10px;
+    clear: both;
+    color:#333;  
+}
+
+/* ==============
+    MOBILE: Menu
+   ============== */
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 0;
+
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+nav a.current{
+  background: #366A7F;
+}
+
+nav a:hover,
+nav a:visited {
+    background: #366A7F;
+    color:white;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ==============
+    MOBILE: Main
+   ============== */
+
+.main {
+    padding: 30px 0;
+}
+
+.main article h1 {
+    font-size: 2em;
+}
+
+.main aside {
+    color: white;
+    padding: 0px 5% 10px;
+}
+
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+	position: absolute;
+	bottom: 0px;
+}
+
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+
+/* ====================
+    INTERMEDIATE: Menu
+   ==================== */
+
+    nav a {
+        float: left;
+        width: 27%;
+        margin: 0 1.7%;
+        padding: 25px 2%;
+        margin-bottom: 0;
+    }
+
+    nav li:first-child a {
+        margin-left: 0;
+    }
+
+    nav li:last-child a {
+        margin-right: 0;
+    }
+
+/* ========================
+    INTERMEDIATE: IE Fixes
+   ======================== */
+
+    nav ul li {
+        display: inline;
+    }
+
+    .oldie nav a {
+        margin: 0 0.7%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+/* ====================
+    WIDE: CSS3 Effects
+   ==================== */
+
+    .header-container,
+    .main aside {
+        -webkit-box-shadow: 0 5px 10px #aaa;
+           -moz-box-shadow: 0 5px 10px #aaa;
+                box-shadow: 0 5px 10px #aaa;
+    }
+
+/* ============
+    WIDE: Menu
+   ============ */
+
+    .title {
+        float: left;
+    }
+
+    nav {
+        float: right;
+        width: 38%;
+    }
+
+/* ============
+    WIDE: Main
+   ============ */
+
+    .main article {
+        float: left;
+        width: 57%;
+    }
+
+    .main aside {
+        float: right;
+        width: 28%;
+    }
+}
+
+@media only screen and (min-width: 1140px) {
+
+/* ===============
+    Maximal Width
+   =============== */
+
+    .wrapper {
+        width: 1026px; /* 1140px - 10% for margins */
+        margin: 0 auto;
+    }
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+
+
+/************************************************************************************************/
+/************************************************************************************************/
+/* CUSTOM */
+/************************************************************************************************/
+/************************************************************************************************/
+#app {
+	width: 100%;
+}
+
+#help {
+	text-align: center;
+	width: 100%;
+}
+
+.buttonContainer {
+	text-align: center;
+	width: 100%;	
+	margin: 0px auto;
+}
+
+.helpLabel {
+	font-family: Montserrat;
+	    font-size: 48px;
+	    margin-bottom: 25px;
+	    color: #366A7F;
+}
+
+.ineedhousing {
+	
+}
+
+.iman {
+	
+}
+
+.iwoman {
+	
+}
+
+.ifamily {
+	
+}
+
+.helpButton{
+	background: url(../assets/img/buttonBG.png);
+	    background-size: 203px 216px;
+	    background-repeat: no-repeat;
+	
+	width: 203px;
+	height: 130px;
+	margin-right: 10px;
+	padding-top: 80px;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	font-family: Montserrat;
+	font-size: 20px;
+	display: inline-block;
+}
+
+.selectedHelpButton {
+	background: url(../assets/img/buttonBGSelected.png);
+    background-size: 203px 216px;
+    background-repeat: no-repeat;
+}
+
+.helpTextContainer {
+	
+}
+
+
+.genButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.nextButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+	
+}
+
+
+
+.helpEnterInfoLabel {
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	
+}
+
+.tallButton {
+	height: 75px;
+	width: 300px;
+	overflow:hidden;
+	padding-bottom: 15px;
+}
+
+.helpUserNameInput {
+	border: 2px solid #366A7F;
+	width: 340px;
+	height: 30px;
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.helpUserNameInput2 {
+	border: 2px solid #366A7F;
+	width: 100px;
+	height: 30px;
+	color: #366A7F;
+	font-family: Montserrat;
+	font-size: 20px;
+	text-align: center;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+
+.helpSendButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.helpInputLabel {
+	font-family: Montserrat;
+	font-size: 14px;
+	cursor: pointer;
+	color: #366A7F;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+
+.helpTextarea {
+	width: 340px;
+	height: 100px;
+}
+
+
+.helpDropDown option{
+	width: 200px;
+	height: 50px;
+	
+	font-family: Montserrat;
+	font-size: 14px;
+	cursor: pointer;
+	color: #366A7F;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+
+.shelterListLabel {
+	font-family: Montserrat;
+	    font-size: 48px;
+	    margin-bottom: 25px;
+	    color: #366A7F;
+}
+
+.shelterItem {
+	background-color: #eeeeee;
+	width: 300px;
+	padding: 20px;
+	border-radius: 6px;
+	color: #777777;
+}
+
+.shelterItemTitle {
+	color: #366A7F;
+	font-weight: bold;
+}
+
+
+#map {
+	width: auto;
+	height: 400px;
+	margin-bottom: 20px;
+}
+
+
+
+/*********** ORGS ****************/
+
+.loginButton {
+	font-family: Montserrat;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #366A7F;
+	color: #ffffff;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding-top: 15px;
+	margin: 0px auto;
+	margin-top: 20px;
+	
+}
+
+.filterLabel {
+	width: 250px;
+	font-family: Montserrat;
+	font-size: 14px;
+	color: #366A7F;
+}
+
+#filterBox {
+	
+}
+
+.peopleList {
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+}
+.personEntry:hover {
+	background-color: #1FBFFF;
+	color: #ffffff;
+}
+.personEntry {
+	font-family: Montserrat;
+	font-size: 12px;
+	max-width: 300px;
+	width: 100%;
+	margin: 0px auto;
+	background-color: #dddddd;
+	display: inline-block;
+	padding: 10px;
+	margin-right: 10px;
+	margin-down: 10px;
+	border-radius: 5px;
+	cursor:pointer;
+}
+
+#step3 {
+	z-index: 1000;
+}
+.userPersonLabel {
+	float:left;
+	height: 20px;
+}
+
+.userPersonValue {
+	float:right;
+	font-weight: bold;
+	height: 20px;
+}
+
+.userRow {
+	width: 100%;
+	height: 25px;
+	display: block;
+	clear:both;
+}
+
+.theMessage {
+	font-family: Montserrat;
+	font-size: 12px;
+	max-width: 300px;
+	width: 100%;
+	margin: 0px auto;
+	background-color: #dddddd;
+	display: inline-block;
+	padding: 10px;
+	margin-right: 10px;
+	margin-down: 10px;
+	border-radius: 5px;
+	cursor:pointer;
+	
+	max-width: 500px;
+	width: 100%;
+}
+
+#animatedModal {
+	padding-top: 50px;
+	color: #ffffff;
+	background-color: #1FBFFF !important;
+	text-align: center;
+}
+
+.theUser {
+	clear: both;
+}
+.theNumber
+{	 
+	clear: both;
+}
+.theMessage {
+	margin: 0px auto;
+}
+
+.premadeButton {
+	cursor:pointer;
+	font-family: Montserrat;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 200px;
+	height: 40px;
+	line-height: 1;
+	padding-top: 10px;
+	background-color: #366A7F;
+	color: #ffffff;
+	margin: 0px auto;
+}
+
+.smsSendButton{
+	cursor:pointer;
+	font-family: Montserrat;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 200px;
+	height: 40px;
+	line-height: 1;
+	padding-top: 10px;
+	background-color: #366A7F;
+	color: #ffffff;
+	margin: 0px auto;
+}
+
+.close-animatedModal{
+	cursor:pointer;
+	font-family: Montserrat;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 200px;
+	height: 40px;
+	line-height: 1;
+	padding-top: 10px;
+	background-color: #366A7F;
+	color: #ffffff;
+	margin: 0px auto;
+}
+
+
+#shelterMap {
+	
+	width: 100%;
+	height: 400px;
+}
+
+.title {
+	font-family: Montserrat;
+	margin-top: 25px;
+}
+#logo{
+	margin-top: 20px;
+	margin-right: 20px;
+	width: 50px;
+	height: 40px;
+	float:left;
+}
+
+.shelterLabel {
+	font-family: Montserrat;
+	font-size: 16px;
+	color: #366A7F;
+}
+
+.chartLabel {
+	font-family: Montserrat;
+	font-size: 16px;
+	color: #366A7F;
+}

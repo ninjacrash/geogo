@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script  src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script  src="js/sammy.min.js" type="text/javascript"></script>
+  <script src="js/sammy.template.js" type="text/javascript"></script>
+  <script src="js/uuid.js" type="text/javascript"></script>
+  <script src="js/moment.min.js" type="text/javascript"></script>
+  
+  <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">	
+  
+  <script src="app.js"></script>
+</head>
+
+<body>
+	
+	
+   <!--Call your modal-->
+       <a id="demo01" href="#animatedModal" style="display:none;">DEMO01</a>
+	   
+       <!--DEMO01-->
+       <div id="animatedModal" style="display: none;">
+           <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
+           <div class="close-animatedModal" style="cursor:pointer;"> 
+               CLOSE MODAL
+           </div>
+            
+           <div class="modal-content" id="theModalContent">
+                     <!--Your modal content goes here-->
+					 <div class="messageInstructions">Select one of the pre-made messages or fill in your custom message and click send</div>
+					 <div class='theUser'></div>
+					 <div class='theNumber'></div>
+					 <br/>
+					 
+					 <div class='theUserSpaceReady premadeButton'>Tell user you have a space ready for them, by clicking here</div>
+					 <br/>
+					 <br/>
+					 
+					 
+					 <textarea class='theMessage' placeholder="Custom message"></textarea>
+					 <div class='smsSendButton'>SEND</div>
+           </div>
+		   
+		   
+       </div>
+   
+  
+	
+	
+	
+  <div class="header-container">
+    <header class="wrapper clearfix">
+      <div id="logo"><img src="assets/img/logoSmall.png"></div>
+	  <h1 class="title">HomeFront</h1>
+      <nav>
+        <ul>
+          <li><a href="#/">Home</a></li>
+		  <li><a href="#/map/">Map</a></li>
+		  <li><a href="#/charts/">Charts</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+	
+	
+  <div class="main-container">
+    <div class="main wrapper clearfix">
+      <div id="app">
+      </div>
+    </div>
+  </div>
+  
+  
+  <script src="js/models/AppModel.js" type="text/javascript"></script>
+   <script src="js/delegates/HelpDelegate.js" type="text/javascript"></script>
+  <script src="js/delegates/MapDelegate.js" type="text/javascript"></script>
+  <script src="js/delegates/ChartDelegate.js" type="text/javascript"></script>
+  
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADfG_-BOFHLpJIpgcGEVpIDeqNvspuOy0">
+    </script>
+	
+    <script src="js/animatedModal.min.js" type="text/javascript"></script>
+	<script src="js/plotly-latest.min.js" type="text/javascript"></script>
+	
+</body>
+
+</html>
