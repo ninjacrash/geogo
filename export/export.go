@@ -7,11 +7,15 @@ import(
 	"io/ioutil"
 )
 
-type Schema struct {
-	schema string
-	name string
-	insertable bool
+type SchemaStr []struct {
+	Schema string
+	Name string
+	Insertable bool
 }
+
+//type SchemaArr struct {
+//	Collection []Schema
+//}
 
 func DataExport(w http.ResponseWriter, r *http.Request) {
 	base_url := "http://pg.globalhack.ninja/"
@@ -20,29 +24,19 @@ func DataExport(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	var life_is_pain_to_a_meeseeks []Schema
+	var life_is_pain_to_a_meeseeks SchemaStr
 	err = json.Unmarshal([]byte(body), &life_is_pain_to_a_meeseeks)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+	// TODO: loop through tables, tar up, send back
+	for _, meeseek := range life_is_pain_to_a_meeseeks {
+		fmt.Fprintf(w, "%s\n", meeseek.Name)
 	}
 
-	for i := 0; i < len(life_is_pain_to_a_meeseeks); i++ {
-		table := life_is_pain_to_a_meeseeks[i]
-		pullData(base_url + table.name)
-	}
-	fmt.Fprintf(w, "%s", "OK")
-}
-
-func pullData(api_url string) error {
-	fmt.Printf(api_url + "\n")
-	return nil
+	//fmt.Fprintf(w, "%s", life_is_pain_to_a_meeseeks)
+	//fmt.Fprintf(w, "%s", body)
 }

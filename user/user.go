@@ -23,7 +23,7 @@ type UserRequest struct {
     Gender string
     Veteran bool
     Education string
-    Dependents int
+    Dependents string
     Ethnicity string
     Homeless bool
     Employed bool
@@ -36,13 +36,17 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
       return
     }*/
     w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-type")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
     // Stop here if its Preflighted OPTIONS request
     if req.Method == "OPTIONS" {
         return
     }
+    fmt.Println(req.Body)
     decoder := json.NewDecoder(req.Body)
     var ur UserRequest
     err := decoder.Decode(&ur)
+    fmt.Println(ur)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -53,7 +57,6 @@ func CreateUser(w http.ResponseWriter, req *http.Request) {
     uuid_b := []byte(uuid)
     var phone_regex = regexp.MustCompile(`^(\d{3,4}.{0,1}){3}$`)
     var email_regex = regexp.MustCompile(`^.*@.*.*$`)
-
     if phone_regex.Match(uuid_b){
       ur.Id_Type = "phone"
     } else if email_regex.Match(uuid_b) {
