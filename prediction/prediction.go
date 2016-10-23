@@ -9,7 +9,9 @@ import(
 )
 
 func Predict(w http.ResponseWriter, r *http.Request) {
-	cmd := exec.Command("Rscript", "test.R")
+	js, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	cmd := exec.Command("Rscript", "live_prediction.R", js)
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
