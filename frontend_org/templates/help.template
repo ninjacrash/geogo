@@ -1,0 +1,99 @@
+<div id="help">
+	
+	<div class="stateContainer" id="step1">
+		<div class="helpLabel">Login</div>
+		<input name="login" class="helpUserNameInput loginEmail" placeholder="Login email"/><br/>
+		<input type="password" name="password" class="helpUserNameInput loginPassword" placeholder="Password"/>
+		<div class="loginButton">Login</div>
+	</div>
+	
+	<div class="stateContainer" id="step2" style="display: none;">
+		
+		<div class="helpLabel">People</div>
+		
+		<label class='filterLabel'>Do a custom search for people or use some of the pre made buttons below</label>
+		<br/>
+		<br/>
+		
+		<div id="filterBox">
+			<label class='filterLabel'>Veteran status</label>
+			<select class="veteranSelect">
+				<option value="both">Both vets and nonvets</option>
+				<option value="true">Veteran</option>
+				<option value="false">Nonveteran</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Homeless status</label>
+			<select class="homelessSelect">
+				<option value="both">Both homeless and nonhomeless</option>
+				<option value="true">homeless</option>
+				<option value="false">Nonhomeless</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Employment status</label>
+			<select class="employedSelect">
+				<option value="both">Both employed and unemployed</option>
+				<option value="true">Employed</option>
+				<option value="false">Unemployed</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Is a family</label>
+			<select class="familySelect">
+				<option value="both">Both single and family</option>
+				<option value="true">Family</option>
+				<option value="false">Non Family</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Female or Male</label>
+			<select class="genderSelect">
+				<option value="both">Both</option>
+				<option value="true">Female</option>
+				<option value="false">Male</option>
+			</select><br/>
+			
+			<label class='filterLabel'>Organization</label>
+		</div>
+		
+		
+		<br/>
+		<div class="genButton sendPeople">Send</div>
+		
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		
+		<div class="helpLabel">Pre-made searches</div>
+		
+		<div class="genButton tallButton allPeople">All people</div>
+		<div class="genButton tallButton shelterPeople">People associated with this shelter</div>
+		<div class="genButton tallButton noAssocPeople">People not associate with any shelter</div>
+		<div class="genButton tallButton newPeople">New entries</div>
+		<!-- <div class="genButton tallButton riskPeople">People at risk</div> -->
+		<div class="genButton tallButton homelessPeople">Homeless people</div>
+	</div>
+	
+	
+	
+	<div class="stateContainer" id="step3" style="display:none;">
+		<div class='peopleMessage'>Click on any of the boxes below to get in contact with the person</div>
+		<div class='peopleList'></div>
+	</div>
+	
+	
+	<div class="stateContainer" id="map" style="display:none;">
+		<div class="shelterLabel">These are the closest shelters to your organization</div>
+		<div id="shelterMap"></div>
+		<div id="shelterList"></div>
+	</div>
+	
+	<div class="stateContainer" id="charts" style="display:none;">
+		<div class="chartLabel">Total Homeless VS Homeless in Shelter
+		<div id="numberOfPeopleInShelter"></div>
+	</div>
+	
+	
+</div>
+
+
+
