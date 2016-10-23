@@ -96,7 +96,7 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 
     var lat_str string
     var lon_str string
-		limit := 3
+		var record_limit int = 3
 
     for key, value := range req.URL.Query() {
       if key == "lat" || key == "latitude" {
@@ -110,7 +110,7 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 			      http.Error(w, err.Error(), http.StatusInternalServerError)
 						return
 					}
-					limit = limit_int
+					record_limit = limit_int
 			}
 
 			//fmt.Println("Key:", key, "Value:", value[0])
@@ -138,7 +138,7 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 		}
 
 		sort.Sort(gr)
-		gr = gr[:limit]
+		gr = gr[ : record_limit]
 
 		fmt.Println(lat)
 		fmt.Println(lon)
