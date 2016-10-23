@@ -8,12 +8,26 @@ import(
 	"io/ioutil"
   "strconv"
 	"math"
+	"sort"
 )
 
 type Geo_Response []struct{
   Shelter_Name string
   Latitude float64
   Longitude float64
+	Distance float64
+}
+
+func (slice Geo_Response) Len() int {
+    return len(slice)
+}
+
+func (slice Geo_Response) Less(i, j int) bool {
+    return slice[i].Distance < slice[j].Distance;
+}
+
+func (slice Geo_Response) Swap(i, j int) {
+    slice[i], slice[j] = slice[j], slice[i]
 }
 
 // haversin(θ) function
@@ -30,7 +44,7 @@ func hsin(theta float64) float64 {
 //
 // distance returned is METERS!!!!!!
 // http://en.wikipedia.org/wiki/Haversine_formula
-func Distance(lat1, lon1, lat2, lon2 float64) float64 {
+func Distance_Between(lat1, lon1, lat2, lon2 float64) float64 {
 	// convert to radians
   // must cast radius as float to multiply later
 	var la1, lo1, la2, lo2, r float64
@@ -82,14 +96,24 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 
     var lat_str string
     var lon_str string
+		limit := 3
 
     for key, value := range req.URL.Query() {
       if key == "lat" || key == "latitude" {
         lat_str = url.QueryEscape(value[0])
       } else if key == "lon" || key == "longitude" {
           lon_str = url.QueryEscape(value[0])
-      }
-      //fmt.Println("Key:", key, "Value:", value[0])
+      } else if key == "num" {
+					limit_str := url.QueryEscape(value[0])
+					limit_int, err := strconv.Atoi(limit_str)
+					if err != nil {
+			      http.Error(w, err.Error(), http.StatusInternalServerError)
+						return
+					}
+					limit = limit_int
+			}
+
+			//fmt.Println("Key:", key, "Value:", value[0])
     }
     lat, err := strconv.ParseFloat(lat_str, 64)
     if err != nil {
@@ -104,9 +128,17 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
     var gr Geo_Response
     gr, err = Get_Shelters()
 		if err != nil {
-      fmt.Println("err")
       http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
     }
+
+		for i, shelter := range gr {
+			gr[i].Distance = Distance_Between(shelter.Latitude,	shelter.Longitude,
+																					lat, lon)
+		}
+
+		sort.Sort(gr)
+		gr = gr[:limit]
 
 		fmt.Println(lat)
 		fmt.Println(lon)
