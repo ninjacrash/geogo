@@ -11,7 +11,6 @@ import (
 	"github.com/ninjacrash/geogo/shelter"
 	"github.com/ninjacrash/geogo/share"
 	"github.com/ninjacrash/geogo/prediction"
-	"github.com/ninjacrash/geogo/closest_shelter"
 )
 
 func main() {
@@ -29,7 +28,7 @@ func main() {
 	r.HandleFunc("/export", share.DataExport)
 	r.HandleFunc("/import", share.DataImport)
 	r.HandleFunc("/predict", prediction.Predict)
-	r.HandleFunc("/closest_shelter", cloest_shelter.Get_Closest_Shelter)
+	r.HandleFunc("/closest_shelter", shelter.Get_Closest_Shelter)
 
 
 	http.Handle("/", r)

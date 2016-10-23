@@ -1,4 +1,4 @@
-package cloest_shelter
+package shelter
 
 import(
 	"fmt"
