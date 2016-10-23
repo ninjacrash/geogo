@@ -62,7 +62,8 @@ get_prediction_matrix.RF <- function(data, seed = 1){
   save(RF, file = model.file)
   print(paste('Model saved as', model.file, collapse = " "))
   wv.file = './data/prediction_words.RData'
-  save(names(word_vectors), file = wv.file)
+  wv <- names(word_vectors)
+  save(wv, file = wv.file)
   print(paste('Prediction words saved as', wv.file, collapse = " "))
   #AUC for training data
   trainTarget<-as.factor(train[[dependent.variable]])
