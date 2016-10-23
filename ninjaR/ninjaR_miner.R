@@ -1,3 +1,18 @@
+build_word_features <- function(data, n = 20){
+  keywords <- build_word_count(data$message)[1:20, 1]
+  feature_matrix <- matrix(rep(0, nrow(data) * n), nrow = nrow(data), ncol = n)
+  for(i in 1:length(data)){
+    words <- sentence_splitter(data[i,]$message)
+    for (j in 1:length(keywords)){
+      word.interest <- keywords[j]
+      feature_matrix[i, j] <- sum(words == word.interest)
+    }
+  }
+  feature_vector <- as.data.frame(x = feature_matrix)
+  names(feature_vector) <- keywords
+  feature_vector
+}
+
 divide_data <- function(data, seed = 1, train_percent = 0.7){
   # Function to partition data into train and test set
   set.seed(seed = seed)
@@ -13,10 +28,10 @@ divide_data <- function(data, seed = 1, train_percent = 0.7){
 get_prediction_matrix.RF <- function(data, seed = 1){
   # set.seed(123)
   # Remove these cols after investigating data
-  ignore.cols <- c(2, 6, 7, 8, 9, 10)
+  ignore.cols <- c(2, 7, 8, 9, 10, 11)
   dependent.variable <- 6
-  
-  partitioned_data <- divide_data(data[, -ignore.cols])
+  word_vectors <- build_word_features(data = data, n = 20)
+  partitioned_data <- divide_data(cbind(data[, -ignore.cols], word_vectors))
   train <- partitioned_data$train
   test <- partitioned_data$test
   # @deep Refactor here start
@@ -46,6 +61,9 @@ get_prediction_matrix.RF <- function(data, seed = 1){
   model.file = './data/prediction_model.RData'
   save(RF, file = model.file)
   print(paste('Model saved as', model.file, collapse = " "))
+  wv.file = './data/prediction_words.RData'
+  save(names(word_vectors), file = wv.file)
+  print(paste('Prediction words saved as', wv.file, collapse = " "))
   #AUC for training data
   trainTarget<-as.factor(train[[dependent.variable]])
   train_pred<-predict(RF,train[,-c(dependent.variable, id.variable)])

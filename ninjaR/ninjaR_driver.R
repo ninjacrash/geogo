@@ -13,12 +13,13 @@ shelter_table[shelter_table$event_type=="request",c("checked_at_shelter")]<-"NO"
 preds.RF <- get_prediction_matrix.RF(shelter_table, seed = reproduction_seed)
 # preds.LM <- get_prediction_matrix.LM(shelter_table, seed = reproduction_seed)
 
-namnnew.user<-data.frame(reason_to_contact="have nowhere to sleep",gender="F",education="high school",what_person_wants="bed")
-do.factors<-rbind(train[,-c(1,6,7,8,9)],new.user)
-last.row<-nrow(do.factors)
-new.user.right<-do.factors[last.row,]
 
-nu.pred.cat<-data.frame(RF.prediction.category=predict(RF,new.user.right))
-nu.pred.prob<-data.frame(RF.prediction=predict(RF,new.user.right,type="prob"))
-nu.user_id<-"newuser_newid"
-nu.pred<-cbind(nu.user_id,nu.pred.cat,nu.pred.prob)
+# new.user<-data.frame(reason_to_contact="have nowhere to sleep",gender="F",education="high school",what_person_wants="bed")
+# do.factors<-rbind(train[,-c(1,6,7,8,9)],new.user)
+# last.row<-nrow(do.factors)
+# new.user.right<-do.factors[last.row,]
+# 
+# nu.pred.cat<-data.frame(RF.prediction.category=predict(RF,new.user.right))
+# nu.pred.prob<-data.frame(RF.prediction=predict(RF,new.user.right,type="prob"))
+# nu.user_id<-"newuser_newid"
+# nu.pred<-cbind(nu.user_id,nu.pred.cat,nu.pred.prob)
