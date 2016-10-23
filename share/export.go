@@ -1,4 +1,4 @@
-package export
+package share
 
 import(
 	"fmt"
@@ -6,13 +6,6 @@ import(
 	"encoding/json"
 	"io/ioutil"
 )
-
-type SchemaStr []struct {
-	Schema string
-	Name string
-	Insertable bool
-	Data string
-}
 
 func DataExport(w http.ResponseWriter, r *http.Request) {
 	base_url := "http://pg.globalhack.ninja/"

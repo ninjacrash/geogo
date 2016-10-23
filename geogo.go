@@ -9,7 +9,7 @@ import (
 	"github.com/ninjacrash/geogo/gohttp"
 	"github.com/ninjacrash/geogo/user"
 	"github.com/ninjacrash/geogo/shelter"
-	"github.com/ninjacrash/geogo/export"
+	"github.com/ninjacrash/geogo/share"
 	"github.com/ninjacrash/geogo/prediction"
 )
 
@@ -25,7 +25,8 @@ func main() {
 	r.HandleFunc("/geo", gohttp.Geolocate)
 	r.HandleFunc("/user", user.CreateUser)
 	r.HandleFunc("/shelters", shelter.GetShelter)
-	r.HandleFunc("/export", export.DataExport)
+	r.HandleFunc("/export", share.DataExport)
+	r.HandleFunc("/import", share.DataImport)
 	r.HandleFunc("/predict", prediction.Predict)
 
 	http.Handle("/", r)
