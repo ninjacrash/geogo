@@ -11,7 +11,7 @@
 	</div>
 	
 	<div class="stateContainer" id="step2">
-		<div class="helpLabel">I need help with...</div>
+		<div class="helpLabel">I need...</div>
 		<div class="buttonContainer">
 			<div class="helpButton step2Button housing" 	value="housing"><div class="helpTextContainer">Housing</div></div>
 			<div class="helpButton step2Button food" 		value="food"><div class="helpTextContainer">Food</div></div>
