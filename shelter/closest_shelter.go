@@ -16,6 +16,11 @@ type Geo_Response []struct{
   Latitude float64
   Longitude float64
 	Distance float64
+	Shelter_Id int
+	Population int
+	Capacity int
+	Pct_Occupied float64
+	Gender_Restriction string
 }
 
 func (slice Geo_Response) Len() int {
@@ -62,7 +67,7 @@ func Distance_Between(lat1, lon1, lat2, lon2 float64) float64 {
 }
 
 func Get_Shelters() (Geo_Response, error) {
-  pg_url := "http://pg.globalhack.ninja/shelter?city=eq.St.%20Louis&select=shelter_name,latitude,longitude"
+  pg_url := "http://pg.globalhack.ninja/shelter_capacity"
   response, err := http.Get(pg_url)
 	var jr Geo_Response
 	if err != nil{
@@ -97,6 +102,7 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
     var lat_str string
     var lon_str string
 		var record_limit int = 3
+		var user_gender string = "no_conflicts"
 
     for key, value := range req.URL.Query() {
       if key == "lat" || key == "latitude" {
@@ -111,6 +117,8 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 						return
 					}
 					record_limit = limit_int
+			} else if key == "gender" {
+					user_gender = value[0]
 			}
 
 			//fmt.Println("Key:", key, "Value:", value[0])
@@ -135,6 +143,9 @@ func Get_Closest_Shelter(w http.ResponseWriter, req *http.Request) {
 		for i, shelter := range gr {
 			gr[i].Distance = Distance_Between(shelter.Latitude,	shelter.Longitude,
 																					lat, lon)
+			if shelter.Population > shelter.Capacity ||	shelter.Gender_Restriction == user_gender {
+				gr[i].Distance = 9999999.0000
+			}
 		}
 
 		sort.Sort(gr)
