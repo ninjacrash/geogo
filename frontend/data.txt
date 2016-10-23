@@ -1,0 +1,36 @@
+ User_Id string
+ 
+    Id_Type string
+    Email string
+    Phone string
+    Password string
+    Reason string
+    Gender string
+    Veteran bool
+    Education string
+    Dependents int
+    Ethnicity string
+    Homeless bool
+    Employed bool
+    Date_Of_Birth string
+    Needs string
+	
+	
+	
+    user_id character varying NOT NULL,
+     id_type character varying NOT NULL,
+     email character varying,
+     phone character varying,
+     reason character varying NOT NULL,
+     password character varying,
+     create_dt timestamp with time zone NOT NULL DEFAULT now(),
+     inactive_dt timestamp with time zone DEFAULT '9999-09-09 05:00:00+00'::timestamp with time zone,
+     gender character(1) NOT NULL,
+     veteran boolean NOT NULL DEFAULT false,
+     education character varying,
+     dependents integer DEFAULT 0,
+     ethnicity character varying NOT NULL,
+     homeless boolean DEFAULT false,
+     employed boolean DEFAULT false,
+     needs jsonb,
+     date_of_birth timestamp with time zone

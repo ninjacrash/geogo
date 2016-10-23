@@ -1,0 +1,72 @@
+<div id="help">
+	
+	<div class="stateContainer" id="step1" style="display: none;">
+		<div class="helpLabel">I am a...</div>
+		<div class="buttonContainer">
+			<div class="helpButton step1 iman" value="man">Man</div>
+			<div class="helpButton step1 iwoman" value="woman">Woman</div>
+			<div class="helpButton step1 ifamily" value="family">Family</div>
+			<div class="helpButton step1 ianon" value="anonymous">Anonymous</div>
+		</div>
+	</div>
+	
+	<div class="stateContainer" id="step2">
+		<div class="helpLabel">I need...</div>
+		<div class="buttonContainer">
+			<div class="helpButton step2Button housing" 	value="housing"><div class="helpTextContainer">Housing</div></div>
+			<div class="helpButton step2Button food" 		value="food"><div class="helpTextContainer">Food</div></div>
+			<div class="helpButton step2Button hygine" 	value="hygine"><div class="helpTextContainer">Hygiene</div></div>
+			<div class="helpButton step2Button casemgmt" 	value="casemanagement"><div class="helpTextContainer">Case Mgmt</div></div>
+			<div class="helpButton step2Button employment" value="employment"><div class="helpTextContainer">Employment</div></div>
+			<div class="helpButton step2Button money" 	value="money"><div class="helpTextContainer">Monetary Svc</div></div>
+			<div class="helpButton step2Button other" 	value="other"><div class="helpTextContainer">Other</div></div>
+		</div>
+		
+		<div class="nextButton">NEXT</div>
+	</div>
+	
+	<div class="stateContainer" id="step3" style="display:none;">
+		
+		<div class="helpEnterInfoLabel">Please enter an email, phone number or user name you would like to use.  You will be able to reuse this to login in the future.  You can also choose to be anonymous in which case we will assign you a user ID you will be need to remember for future use.  <br/>
+		<span style="color: #cc0000">ALL INFO IS OPTIONAL, YOU DO NOT HAVE TO FILL OUT WHAT YOU DONT WANT TO</span>
+		</div>
+		
+		<br/>
+		<label class="helpInputLabel" for="username">Enter a desired user name, leave blank for anonymous, we will generate a user id for you</label><br/>
+		<input name="username" class="helpUserNameInput helpUsername" placeholder="username"/><br/>
+		<input name="email" class="helpUserNameInput helpEmail" placeholder="Email"/><br/>
+		<input name="phone" class="helpUserNameInput helpPhone" placeholder="phone (xxx-xxx-xxxx)"/><br/>
+		<textarea name="reason" class="helpUserNameInput helpTextarea helpReason" placeholder="reason for seeking help"/><br/>
+		<select name="gender" class="helpDropDown helpGender">
+			<option value="Female">Female</option>
+			<option value="Male">Male</option>
+		</select><br/>
+		
+		<input type="checkbox" name="veteran" class="helpVeteran">Veteran?</input><br/>
+		<textarea name="education" class="helpUserNameInput helpTextarea helpEducation" placeholder="Tell us about your education"/><br/>
+		<input name="dependents" class="helpUserNameInput helpDependents" placeholder="# of dependents"/><br/>
+		<input name="ethnicity" class="helpUserNameInput helpEthnicity" placeholder="Ethnicity"/><br/>
+		<input type="checkbox" name="homeless" class="helpHomeless">Homeless?</input><br/>
+		<input type="checkbox" name="employed" class="helpEmployed">Employed?</input><br/>
+		
+		<br/>
+		<label class="helpInputLabel" for="dobMonth">Date of birth</label><br/>
+		<input name="dobMonth" class="helpUserNameInput2 helpDobMonth" placeholder="DOB Month"/>
+		<input name="dobDay" class="helpUserNameInput2 helpDobDay" placeholder="DOB Day"/>
+		<input name="dobYear" class="helpUserNameInput2 helpDobYear" placeholder="DOB Year"/>
+		<br/>
+		
+		
+		
+		<div class="helpSendButton">Send</div>
+		
+	</div>
+	
+	
+	
+	<div class="stateContainer" id="step4" style="display:none;">
+		You have been registered thank you!
+		<div id="generatedUUID"></div>
+	</div>
+</div>
+
