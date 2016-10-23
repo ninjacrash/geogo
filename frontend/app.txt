@@ -1,7 +1,13 @@
 App names: Homebound, Home utils, Street vision, street smarts, 
 homefront, home helper
 
-X is a collection of resources for homeless-aid organizations and shelters
+
+HomeFront
+Home should be for everyone
+
+
+HomeFront addresses
+ is a collection of resources for homeless-aid organizations and shelters
 to help work in a more efficient way.  The app provides visualizations
 of nearby shelters, SMS messaging for clients, capacity management and 
 user registration and risk assessment
