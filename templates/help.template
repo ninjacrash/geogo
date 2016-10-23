@@ -82,11 +82,13 @@
 	
 	
 	<div class="stateContainer" id="map" style="display:none;">
+		<div class="shelterLabel">These are the closest shelters to your organization</div>
 		<div id="shelterMap"></div>
+		<div id="shelterList"></div>
 	</div>
 	
 	<div class="stateContainer" id="charts" style="display:none;">
-		
+		Charts
 	</div>
 	
 	

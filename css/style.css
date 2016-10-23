@@ -640,3 +640,9 @@ nav a:hover {
 	height: 40px;
 	float:left;
 }
+
+.shelterLabel {
+	font-family: Montserrat;
+	font-size: 16px;
+	color: #366A7F;
+}

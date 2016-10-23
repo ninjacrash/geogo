@@ -169,75 +169,15 @@ var loggedIn = false;
 		
 		$.get("http://api.globalhack.ninja/closest_shelter?address=" + model.orgData.street_address + "&num=10", function(data){
 				
-			//console.log(data);
-			//http://pg.globalhack.ninja/shelter?shelter_id=eq.1
-			
-			
-			var locations = [];
-			var items = [];
-			var doneCount = 0;
-			
-			for(var i = 0; i < data.length; i++)
-			{
-				var theData = data[i];
-				
-				items["item" + theData.Shelter_Id] = theData;
-				$.get("http://pg.globalhack.ninja/shelter?shelter_id=eq." + theData.Shelter_Id, function(xdata){
-					//console.log("Got data----------------------");
-					
-					
-					var sid = xdata[0].shelter_id;
-					for(var x in xdata[0])
-					{
-						items["item" + sid][x] = xdata[0][x];
-					}
-					
-					doneCount++;
-					if(doneCount >= data.length)
-					{
-						for(var xx in items)
-						{
-							locations[locations.length] = [items[xx].Shelter_Name + "<br/>" + items[xx].street_address + ", " + items[xx].city  + " " + items[xx].state + "<br/>" + items[xx].phone, items[xx].Latitude, items[xx].Longitude];
-						}
-						root.createMap(locations);
-					}
-					
-				});
-				
-				
-			}
+			var md = new MapDelegate();
+			md.makeMap(data);
 			
 		});
 		
 	});
 	
 	
-    this.createMap = function(locations)
-	{
-	    var map = new google.maps.Map(document.getElementById('shelterMap'), {
-	      zoom: 12,
-	      center: new google.maps.LatLng(38.6226,-90.1928),
-	      mapTypeId: google.maps.MapTypeId.ROADMAP
-	    });
-		
-	    var infowindow = new google.maps.InfoWindow();
-		
-	    var marker, i;
-
-	    for (i = 0; i < locations.length; i++) {  
-	      marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	        map: map
-	      });
-		  
-	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-	        return function() {
-	          infowindow.setContent(locations[i][0]);
-	          infowindow.open(map, marker);
-	          }
-	      })(marker, i));
-	    }
-	}
+    
 	
 	this.get('#/charts/', function(context) {
 		console.log("CHARTS");
@@ -442,159 +382,12 @@ var loggedIn = false;
 				//http://sms.globalhack.ninja/send?message=Hi%20Shay&phone=3146513545
 				
 				
-				
-				
-				
-				
 			});
-			
-			/*
- 			   $.post(API_BASE + "/user", postData,
-                function(data) {
-                    alert("Data Loaded: " + data);
-            	});
-			*/
-			
-			
-			
+		
     });
 });
 	
 	
-   
-	
-	
-    this.get('#/shelters/', function(context) {
-        var str=location.href.toLowerCase();
-        context.app.swap('');
-        context.render('templates/shelters.template', {}).appendTo(context.$element()).then(function(){
-			
-			$.get(BASE_URL + "/shelter", function(data){
-				console.log("Done");
-				console.log(data);
-				
-				for(var i = 0; i < data.length; i++)
-				{
-					console.log(data[i]);
-					
-					var div = "<div class='shelterItem'>"
-					div += "	<div class='shelterItemTitle'>" + data[i].shelter_name + "</div>"
-					div += "	<div class='shelterItemAddress'>" + data[i].street_address + ", " + data[i].city + ", " + data[i].state + " " + data[i].zip_code + "</div>";
-					div += "	<div class='shelterItemPhone'>" + data[i].phone + "</div>";
-					div += "</div><br>";
-					
-					$("#shelterListInner").append(div);
-				}
-				
-				
-				//initMap();
-				
-				
-				function initMap3() {
-					
-						
-  		          
-				  
-				  		var pos;
-  		         		 if (navigator.geolocation) 
-						 {
-							 
-							//NAV BLOCK 
-  		         		   navigator.geolocation.getCurrentPosition(function(position) {
-  		         		     pos = {
-  		         		       lat: position.coords.latitude,
-  		         		       lng: position.coords.longitude
-  		         		     };
-				 			  
-	   		 			  	console.log("Position");
-	   		 			  	console.log(pos);
-                 			
-	 				        var directionsDisplay = new google.maps.DirectionsRenderer;
-	 				        var directionsService = new google.maps.DirectionsService;
-	 				        var map = new google.maps.Map(document.getElementById('map'), {
-	 				          zoom: 14,
-	 				          center: {lat: pos.lat, lng: pos.long}
-	 				        });
-							var infoWindow = new google.maps.InfoWindow({map: map});
-							
-							
-							
- 		         		     infoWindow.setPosition(pos);
- 		         		     infoWindow.setContent('Location found.');
- 		         		     map.setCenter(pos);
-	 				        directionsDisplay.setMap(map);
-							
-							
-					        //https://maps.googleapis.com/maps/api/geocode/json?&address=st%20louis%2C%20mo
-							
-					        document.getElementById('mode').addEventListener('change', function() {
-					          calculateAndDisplayRoute(directionsService, directionsDisplay, {lat: 40.7366038, lng: -74.0263816}, {lat: 37.768, lng: -122.511});
-					        });
-							
-							calculateAndDisplayRoute(directionsService, directionsDisplay, {lat: 37.77, lng: -122.447}, {lat: 37.768, lng: -122.511});
-							
-							
-  		         		   }, function() {
-  		         		     handleLocationError(true, infoWindow, map.getCenter());
-  		         		   });
-						   
-				 		 }
-						 else
-						 {
-							 alert("Location services are not available for your device");
-						 }
-		 			 
-				        
-				      }
-
-				      function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {
-				        var selectedMode = document.getElementById('mode').value;
-				        directionsService.route({
-				          origin: origin,  // Haight.
-				          destination: destination,  // Ocean Beach.
-				          // Note that Javascript allows us to access the constant
-				          // using square brackets and a string value as its
-				          // "property."
-				          travelMode: google.maps.TravelMode[selectedMode]
-				        }, function(response, status) {
-				          if (status == 'OK') 
-						  {
-				            directionsDisplay.setDirections(response);
-				          } 
-						  else 
-						  {
-				            window.alert('Directions request failed due to ' + status);
-				          }
-				        });
-						
-						
-				    }
-					  
-					  
-				
-				
-				
-				initMap3();
-				
-				
-				
-				
-				
-			});
-			
-		});
-	});
-
-	/*
-    this.before('.*', function() {
-
-        var hash = document.location.hash;
-        $("nav").find("a").removeClass("current");
-        $("nav").find("a[href='"+hash+"']").addClass("current");
-		
-		
-   });
-	*/
 
   });
 
