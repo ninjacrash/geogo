@@ -18,6 +18,7 @@ app.get('/send', function(req, res) {
   if (typeof number === undefined) {
     return res.sendStatus(400);
   }
+  res.set('Access-Control-Allow-Origin', '*');
   var message = req.query.message;
   if (typeof message === undefined) {
     message = 'Please provide a message.';
