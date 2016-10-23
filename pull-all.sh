@@ -3,5 +3,9 @@ git pull
 cd ~/frontend_org
 git pull
 cd ~/workspace/src/github.com/ninjacrash/geogo
+cp -rf frontend ~/frontend
+cp -rf frontend_org ~/frontend_org
 git pull
-cd ~
+pkill -f geogo
+nohup go run geogo.go &
+echo $!
