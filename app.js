@@ -123,6 +123,17 @@ var loggedIn = false;
 			});
 		});
 		
+		$("#theModalContent .smsSendButton").click(function(){
+			var model = AppModel.getInstance();
+			model.smsMessage = $("#theModalContent .theMessage").val();
+			$.get("http://sms.globalhack.ninja/send?message=" + model.smsMessage + "&phone=" + model.smsPhone, function(data){
+				console.log(data);
+				alert("Message sent");
+				//close-animatedModal
+				$("#animatedModal .close-animatedModal").trigger("click");
+			});
+		});
+		
 		$("#demo01").animatedModal();
 		
 	}
