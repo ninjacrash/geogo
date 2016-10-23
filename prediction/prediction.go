@@ -5,12 +5,15 @@ import(
 	"net/http"
 	"os/exec"
 	"bytes"
-	"log"
 	"io/ioutil"
 )
 
 func Predict(w http.ResponseWriter, r *http.Request) {
 	js, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "%s", err)
+		return
+	}
 	fmt.Println(js)
 	fmt.Println(r.Body)
 	defer r.Body.Close()
