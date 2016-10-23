@@ -20,7 +20,9 @@ func Predict(w http.ResponseWriter, r *http.Request) {
 	err2 := cmd.Run()
 	if err2 != nil {
 		fmt.Println("ey yo fatal")
-		log.Fatal(err)
+		//log.Fatal(err)
+		fmt.Fprintf(w, "%s", err2)
+		return
 	}
 	result := out.String()
 	fmt.Printf("Rscript results: %q\n", result)
